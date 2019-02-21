@@ -1,0 +1,687 @@
+http://imooc.51purse.com
+https://pan.baidu.com/s/1Xrhtj0aUJC3GnO7ZDOqG0w 提取码:m605
+https://www.bilibili.com/video/av33561526/?p=51
+
+1.下载nodejs  傻瓜式安装
+2.找到nodejs目录  环境配置 
+3.在nodejs下全局安装  npm i -g vue-cli
+4.查看  vue -v   安装是否成功
+5.成功  vue init webpack 模板名称 项目名称
+    vue-router Y   其他为 n
+6.运行项目执行   npm run dev
+【npm install 生成node-module文件夹】
+7.浏览器打开  http://localhost:8080/#/
+
+
+
+1.build是打包的配置文件夹
+    build.js  生产环境构建代码
+    check-versions.js  检查node&npm等版本
+	dev-client.js  热加载相关
+	dev-server.js  构建本地服务器
+	utils.js  构建配置公用工具
+	vue-loader.conf.js  vue加载器
+	webpack.base.conf.js  webpack基础环境配置
+	webpack.dev.conf.js  webpack开发环境配置
+	webpack.prod.conf.js  webpack生产环境配置
+2.config// 项目开发环境配置相关代码
+	dev.env.js   开发环境变量
+	index.js  项目一些配置变量
+	prod.env.js  生产环境变量
+node_modules// 项目依赖的模块
+3.src项目配置的源码
+    　	main.js  程序入口文件（入口js文件）
+    App.vue    页面入口文件（根组件）
+    assets  资源目录  logo.png
+　　	components vue公共组件   Hello.vue
+　　	router     前端路由  index.js// 路由配置文件　	
+4.static组要方静态资源(比如一些图片，json数据等) 
+5. babelrc是es6解析的配置
+6. editorconfig编译器的配置
+7. gitignore是忽略git提交的配置
+8. postcssrc.js是html添加前缀的项目
+9. index.html是单页面的入口
+10. package.json是基础的配置
+        dependencies 真正需的
+        devDependencies  赋值开发的插件
+        engines  引擎
+【路由】
+一 路由
+1.路由基础介绍
+    什么是前端路由？
+        路由是根据不同的url地址展示不同的内容或页面
+        前端路由是把不同路由对应不同的内容或页面的任务交给前端来做，之前是通过服务器url的不同返回不同的页面实现的
+2.路由的使用场景
+    单页面应用，大部分页面结构不变，只改变部分内容的使用
+3.路由的优缺点
+    优点:用户体验好，不需要每次都从服务器全部获取，快速展现给用户
+    缺点:
+        1.不利于SEO  
+        2.是浏览器的前进，后退键的时候会重新发送请求没有合理的利用缓存
+        3.单页面无法记住之前滚动的位置
+
+二 vue-router用来构建SPA
+    1.<router-link to="对应的路由"></router-link> 跳转到对应的路由   a标签的封装
+    或 this.$router.push({""}) 编程式路由  原生js开发
+    2.<router-view></router-view>  用来渲染到页面
+
+三 动态路由(src)
+    	模式                             					 匹配路径                				 $router.params
+  /user/:username                   / user/evan               {username:"evan"}  
+  /user/:username/post/:post_id     /user/evan/post/123       {username:"evan",post_id:123}     
+#代表哈希hash   可以改变  mode指定路由模式
+获取路由用   $router.parpams.name
+
+四 嵌套路由(路由嵌套路由)
+    使用children来定义子路由  路由不能用【./】  
+    用到vue-router的俩个标签  来实现跳转
+        路径必须是绝对路径
+        
+五 编程式路由(在新页面打开)
+	this.$router.push('name')
+    this.$router.push({path:""})
+    this.$router.push({path:'name'?a=123})或this.router.push({path:"name",query:{a:123}})
+    this.router.go(1)
+获取路由用 $router.query.name  
+	在新窗口打开
+	    1.不传参数
+			let myurl="/contractc-info/detail/" + contType + "/" + scope.row.pk_contract; //是你的自定义的路由字符串拼接
+			let routeData = this.$router.resolve({ path: myurl });
+			window.open(routeData.href, '_blank');
+	    2.传参数
+	    let routeData = this.$router.resolve({
+	       path: "/"                   
+		   name: "searchGoods",
+		   query: params,
+		   params:{catId:params.catId}
+		});
+		window.open(routeData.href, '_blank');  _slef在自己窗口打开
+ 
+
+六 命名路由和命名视图
+    给路由定义不同的名字，根据名字进行匹配
+    :to="{name:'cart',params:{cart:123}}"  必须用v-bind指令动态编译
+    params:{}是路由参数  不是页面跳转的参数
+    给不同的router-view定义名字，通过名字进行对应组件的渲染
+	在同一个路由下渲染多个组件    components
+    <router-view/> 标签用来分割页面
+
+
+【vue-Resource】
+	下载vue-respurce.min.js   引用
+	npm i vue-resource --save  安装
+请求方式:get,head,delete,jsonp
+	  post,put,pacth
+(url,[options])
+(url,body,[options])
+参数：
+	url:请求地址
+	methods：请求的方式
+	body：post，put，pacth请求的参数
+	params：get类的请求的参数
+	headers：是请求是往request header中注入的参数   调服务是需要注入参数
+	timeout：毫秒  请求超越的时间
+	before：请求发送前的处理函数
+	progress：ProgressEvent回调处理函数
+	credientials：表示跨域请求是否使用凭证
+全局拦截器  Vue.http.interceptors.push(callback)
+全局提取地址信息  http:(root:"放置公共的地址信息")
+get post http实例演示(已经挂载到this.$http上面了)
+	1.get:必须要有 params
+		this.$http.get(url,{params:{userId:101},header:{}).then(res=>{
+			this.msg = res.data    //  msg用来渲染数据       data默认的  代表数据
+		})	
+	2.post多一个参数   用来发送数据	
+	3.this.$http({直接写参数})
+	
+	
+【Axios】
+	npm i axios --save	
+请求方式：
+	axios.requset(config)
+	axios.get(url,[,config])
+	axios.head(url,[,config])
+	axios.delete(url,[,config])
+	axios.options(url,[,config])
+	
+	axios.post(url,[,data[,config]])
+	axios.put(url,[,data[,config]])
+	axios.patch(url,[,data[,config]])
+参数与vue-resource相差不多	
+	function getUserAccount(){
+		return axios.get('./user/12345');
+	}
+	function getUserPermissions(){
+		return axios.get("./user/12345/permissions")
+	}
+	function all([getUserAccount(),getUserPermissions()]){
+		.then(axios.spread(function (acct,perms){
+			
+		}));
+	}
+全局拦截
+	axios.interceptors.request.use(function(requset){
+		console.log('requset init')
+		//
+		return requset
+	})
+	axios.interceptors.response.use(function(response){
+		console.log("response init")
+		return response
+	})	
+	
+	
+vue-resource与axios的区别？
+	vue--resource它可以通过XMLHttpRequest或JSONP发起请求并处理响应。
+	有jsonp的请求方式	
+	支持全局拦截数据   Vue.http.interceptors.push(requset，next)
+	
+	axios基于 Promise 的 HTTP 请求客户端，可同时在浏览器和 Node.js 中使用。
+	有options请求方式
+	支持全局拦截 :axios.interceptors.request.use(callback) 请求前
+		 	   axios.interceptors.response.use(callback) 响应后
+	
+	
+【AMD CMD CommonJs和es6对比】
+	AMD是RequireJS在推广过程中对模块定义的规范化产出
+		依赖前置（异步模块定义）
+		define(['package/lib'],function(lib){
+			function foo(){
+				lib.log('hello world');
+			}
+			return {
+				foo:foo
+			}
+		})
+	CMD是SeaJs在推广过程中对模块定义的规范化产出
+		依赖就近（同步模块定义）	
+		define(function(requirt,export,module){
+			var $ = requirt("jquert");
+			var Spinning = requirt("./spinning");
+		})
+	CommomJs规范  - module.exports
+		nodejs后台推荐使用(服务端)
+		导出
+			exports.area = function(r){
+				return Math.PI*r*r;
+			}
+			ecports.circumference = function(r){
+				return 2*Math.PI*r
+			}
+	export/import  导出/导入
+		export default{
+			props:['num'],
+			data(){
+				return {}
+			},
+			methods:{
+				increment(){
+					this.$emit('incre')
+					import('./../until')
+				},
+				decrement(){
+					this.$emit('decre')
+				}
+			}
+		}
+	
+	
+【商品列表基础组件拆分】	
+	header组件
+	footer组件
+	内容组件
+	
+	
+	
+	
+【Node基础编程】  
+npm install pm2 -g
+pm2 start server\bin\www   运行js
+pm2 stop server\bin\www    停止
+
+
+nodejs.cn  Api  
+	Crypto加密    微信加密
+	debugger(调试器)	
+	File System(文件系统)
+	http(重点，重点，重点)
+	path(路径)
+	url(地址)
+	util(使用工具)
+	含义:
+		1.基于Chrome V8引擎
+		2.单线程
+		3.使用JavaScript开发后端代码
+		4.非阻塞的IO
+		
+	Common规范
+		1.一起输出
+			module.exports = {}
+		2.单个输出
+			exports.名称 = 。。。
+			
+	创建一个 Http Server	(demo.js  util.js)
+		引入        http =  require('http')
+		用方法       http.createServer(callback1).listen(callback2)
+			calllback1(req,res)     
+			calllback2(端口号,'127.0.0.1',callback)  
+			   
+	创建一个Web容器，可以访问到HTML内容(server.js)
+		引入  fs 系统模块
+			先通过pathname获取要跳转的页面 (/index.html)多一个/
+				pathname = url.parse(req.url).pathname.substring(1)
+			再通过方法
+				fs.readFile(pathname,(err,data)=>{
+					if(err){
+						res.writeHead(404,{
+							'Content-Type':"text/html"
+						})
+					}else{
+						res.writeHead(200,{
+							'Content-Type':"text/html"
+						});
+						res.write(data.toString())
+					}
+					res.end()
+				})    
+	Http模块客户端演示(调用第三方服务)
+		调用是客户端   被调用是服务端		  
+		https://www.imooc.com/index/getstarlist
+		现在基本都是https
+			引入 https  (要用JSON.parse转化为JSON数据)
+				通过 get方法访问
+				res.on('data')
+				res.on('end',()=>{
+					result = JSON.parse(data);
+				})
+
+
+【node的启动与调试】
+	1.命令行直接启动
+	2.webstorm  
+	 点击运行(run)
+	   配置 Edit Configurations...
+		在defaults下面有一些项目找到Node.js选项
+			Node interpreter  安装到js的目录    /usr/local/bin/node
+			Working directory   工作的目录
+			Application parameters  最终启动的目录    文件夹名/bin/www 
+	3.使用pm2 不能跨电脑的
+		cnpm i pm2 -g   全局安装
+		进入工作空间
+			pm2 start [app1,app2,...]   可以启动很多(需要配置)   
+			pm2 start server/bin/www    打开进程
+			pm2 end all  停止所有
+			pm2 end server/bin/www 停止一个
+			pm2 list  查看我们启动了几个项目
+			pm2 log  可以查看日志
+	4.supervisor(可以用监测)
+		在大点的项目中，有时会失灵，需要重新启动
+		supervisor bin/www
+		
+		
+【搭建基于Express框架运行环境】
+	安装express generator生成器
+		cnpm i -g express-generator
+	通过生成器自动创建项目(使用视图模板)
+		express -version  查看版本
+		express server  自动创建了一个server文件的espress的框架
+	配置分析
+		bin  应用启动
+		public:静态资源目录
+		router:路由  浏览器访问的地址
+		views:视图(jade)
+		app.js:入口
+	
+	安装成功需要  npm i 把依赖下载下来   
+		但是她接收的是jade语法 
+		可以修改为html  需要下载ejs模块  	 npm i ejs --save
+		可以修改为ejs    需要下载ejs-mate模块	npm i ejs-mate --save
+			var engine = require('ejs-mate');//添加引用
+			app.set('views', path.join(__dirname, 'views'));//在app.js中找到这个行
+			app.set('view engine', 'ejs');//修改jade为ejs
+			app.engine('ejs', engine);//添加这行
+		
+		引入ejs模块
+			app.set('view engine', 'html');
+			app.engine('.html',ejs.__express)
+		也有一级二级路由
+	
+	
+【MongoDB安装和环境搭建】	(以json格式存储)
+	特点:高可扩展性，分布式存储，低成本，结构灵活
+	
+	下载安装包或者压缩包
+		htpps://pan.baidu.com/s/1mhPejwO
+		https://www.imooc.com/article/18438
+		32-bit安装	3.2.3 -signed.msi
+		64-bit安装   
+	添加db存储和日志存储文件夹
+		mongod --dbpath C:\MongoDB\data    启动mongodb数据库
+		在浏览器中  输入  localhost:27017  访问数据库	
+	添加服务，配置环境变量，启动服务Mongo
+		在安装mongodb数据库的盘里  新建一个文件夹mongodb  
+		mongodb里新建3个文件夹    data   etc配置     logs日志
+		logs日志中 新建一个mongodb.log用来装日志
+		etc配置中  新建一个mongo.conf用来装配置
+				#数据库路径
+				dbpath=C:\MongoDB\data\
+				#日志输出文件路径
+				logpath=C:\MongoDB\logs\mongodb.log
+				#错误日志采用追加模式，配置这个选项后mongodb的日志会追加到现有的日志文件，而不是从新创建一个新文件
+				logappend=true
+				#启用日志文件，默认启用
+				journal=true
+				#这个选项可以过滤掉一些无用的日志信息，若需要调试使用请设置为false
+				quiet=false
+				#端口号 默认为27017
+				port=27017
+				#http 配置可以在浏览器中打开
+				httpinterface=true								
+		mongod --config C:\MongoDB\etc\mongo.conf     启动mongodb数据库
+		
+		在浏览器中  输入  localhost:27017  访问数据库
+		在浏览器中  输入  localhost:28017  访问数据库的配置及日志					
+		添加到本地服务里面
+		mongod --config C:\MongoDB\etc\mongo.conf --install --serviceName "MongoDB"
+		
+		
+		
+【MongoDB基本语法】
+	database    数据库
+	coliection   数据库表/集合
+	document   数据记录
+	field    数据字段
+	index    索引
+	primary.key   主键mongodb自动将_id字段设置为主键	
+	增删改查
+		创建数据库
+			use demo(创建demo数据库)
+		查看数据库
+			show dbs(查看所有的数据库)
+		删除数据库
+			db.dropDatabase()  (删除当前数据库)
+	
+	
+		创建集合:
+		  	1.db.createCollection('user')
+		查看集合:
+			1.show collections	
+		删除集合:
+			1.db.user.drop()  删除user集合 		
+		
+		创建集合中数据
+			1.db.users.insert({id:123,name:'hello'})  创建集合以及插入数据
+		查看集合中的数据
+			1.db.user.find()   查看集合下所有的数据
+			2.db.user.find().pretty()  格式化()
+			3.db.user.findOne()   查看第一条数据
+			4.db.user.find(userName:"Jack")   查看集合指定的数据
+			5.db.user.find("class.name":"Jack")   查看集合指定的子数据
+			条件符  $gt大于    $lt小于  $eq等于  $lte小于等于  $gte大于等于      				
+				
+		改集合中的数据
+			1.第一个对象是条件    第二个对象{$set:{}}修改的值
+			  db.user.updata({userName:"Jack"},{$set:{userAge:30}})
+			2.更新子数据
+			  db.user.updata({userName:"Jack"},{$set:{'class.name':'sunjiweis'}})
+		删除集合中的数据	
+			1.db.user.remove(userId:1001)  
+			
+	
+		扩展用命令导入数据
+			在mongodb目录下的bin运行
+			mongoimport -d 数据库名 -c 集合名 --file  路径(直接拉进来)                                           						
+	
+【基于Express开发商品列表查询接口】
+	1.安装Mongoose   为mongoose做的数据库的插件
+		npm i mongoose --save
+	2.创建路由
+		在routes下创建一个js文件夹    需要在app.js中去配置一下路由可以访问到这个js文件夹       
+			var goodsRouter = require('./routes/good');
+			app.use('/goods', goodsRouter);
+	3.创建model(Schema做一个模板    model)
+		1.用Schema做一个模板   s = new mongoose.Schema({})
+		2.用model 让模板与数据库做匹配   Goods = mongoose.model('good', s)  【不能加s】
+		3.用connect 来连接数据库   mongoose.connect('mongodb://127.0.0.1:27017/db_demo',{useNewUrlParser: true});  数据库名
+		4.用find()方法来向前端发送数据      Goods.find(err,doc)
+	4.把数据渲染到页面
+		需要到config下的index.js中找到proxyTable
+		将/goods这个路由匹配到数据库"http://localhost:3000"上
+			proxyTable: {
+		    	"/goods":{
+		    		target:"http://localhost:3000"
+		    	}
+		    }
+			
+
+【商品的排序、商品的分页、价格过滤、加入购物车、登录、退出、拦截】
+	排序:用数据库的sort方法
+	分页:用到vue-infinite-scroll插件来实现
+	过滤:数据库做一个分级处理
+
+	
+	
+location.path   获取相对路径
+location.href   获取所有地址
+location.hash   获取哈希值  #后面的
+
+插件	
+supervisor  启动node
+express-session   启用session
+价格过滤 一个插件（currency）
+	全局过滤 在main.js中定义
+		先引入
+		Vue.filter("currency":currency)
+	
+	局部过滤 在单独的页面定义Cart.vue
+		import 来引入进来
+		filter 来定义(必须是函数)
+			在页面组件中用  | currency('$')加一个货币符号
+
+	
+	
+	
+【父子组件传递实现全局模态框】	
+	基本原则:  1.父组件可以传递属性到子组件
+			2.状态只能是父组件来传递过来
+			3.子组件可以修改这个状况，但是不能修改父组件的状态
+			
+
+	
+	
+【地址模块实现】	
+	地址列表功能
+	地址切换和展开功能
+	地址设置默认功能
+	地址删除功能	
+	
+
+【vuex基本介绍】在demo文件夹中的 vuex有基本例子
+	1.什么是vuex？
+		vuex是一个专为vue.js应用程序开发的状态管理模式。
+			只能用于vue.js中
+			vuex管理状态（将一些变量抽离出来放到vuex中进行管理）
+				组件data里的变量就是vue的状态
+	2.为什么要用vuex？
+		当我们构建一个中大型的单页面应用程序时，vuex可以更好的帮助问我们在组件外部统一管理状态。
+			大量页面使用同一个组件时候，而且组件的状态一直都需要改变。
+	3.vuex的核心概念？
+		State      
+			唯一的数据源载体     将组件里的状态放到state里面去
+			单一状态树   注册在main.js中，在vue里面所有的层级关系都可以使用
+			const Counter = {
+				template:'<div>{{count}}</div>',
+				computed:{
+					count(){
+					//  this.$store 拿到vuex的对象
+					//  state  数据源
+					//  count  属性 
+						return this.$store.state.count
+					}
+				}
+			}
+			
+		Mutations(里面的函数必须是同步的)  
+			更改vuex的store中的状态的唯一方法  提交mutation
+			const store = new Vuex.Store({
+				state:{
+					count:1
+				},
+				mutations:{
+				//  定义一个函数
+					incremnet(state){
+						//  变更状态
+						state.count++
+					}
+				}
+			})
+			//  调用函数  运行函数
+			store.commit('increment')
+			
+			
+		Getters  
+			通过Getters可以派生出一些新的状态
+			找出一些在todos中所有数据有特殊需要的数据(不需要去重新包装)
+			const store = new Vuex.Store({
+				state:{
+					todos:[
+						{id:1,name:'sunjiwei',age:'18'},
+						{id:2,name:'jiwei',age:'28'}
+					]
+				},
+				getters:{
+					doneTodos:state=>{
+						return state.todos.filter(age=>age.done)
+					}
+				}
+			})
+					  
+		Actions(里面的函数可以是异步的)
+			action提交的是mutation，而不是直接变更状态
+			action可以包含一些异步的操作
+			const state = new Vuex.Store({
+				state:{
+					count:0
+				},
+				mutations:{
+					increment(state){
+						state.count++
+					}
+				},
+				actions:{
+					increment(context){
+						context.commit('increment')
+					}
+				}
+			})
+			
+		Modules
+			面对复杂的应用程序，当管理的状态比较多时，我们需要将Vuex的store对象分割成模块
+			const moduleA = {
+				state:{},
+				mutations:{},
+				actions:{},
+				getters:{}
+			};
+			const moduleB = {
+				state:{},
+				mutations:{},
+				actions:{},
+				getters:{}
+			};
+			const store = new  Vuex.State({
+				modules:{
+					a:moduleA,
+					b:moduleB
+				}
+			})
+
+Vue.Components通过Dispath去触发Actions用Commit来提交Mutations用来改变State状态最后通过Render返回到Vue.Components组件中
+
+
+	
+【webpack基本介绍】
+	app.js
+		接收bar函数
+		import bar from './bar'
+		bar();
+	bar.js
+		导出一个bar的函数
+		export default function bar(){
+			// 
+		}
+	webpack.config.js
+		放一些配置
+		module.exports = {
+		 	//  入口 接入app.js
+			entry:'./app.js',
+			output:{
+				filename:'bundle.js'
+			}
+		}
+	page.html
+		<script src='bundle.js'></script>
+	
+
+	基础的插件(www.imooc.com/learn/802  webpack的深入与实战)
+		html-webpack-plugin
+			帮助生成一些html文件，做多页面的时候效果更佳
+			做详情也的时候用到同一个模板		
+		extract-text-webpack-plugin
+			抽取一些文本 将 css 等一些文件当成文本抽取出来
+		UglifyJsPlugin/new webpack.optimize.UglifyJsPlugin()
+			这俩个对是js的合并压缩
+		CommonsChunkPlugin/new webpack.optimize.CommonsChunkPlugin()
+			这俩个都是抽取公共的模块，多个页面之间的公用的文件抽取出来
+		clean-webpack-plugin
+			在打包之前先把文件夹清楚掉
+		copy-webpack-pluain	
+			文件的复制
+	loader加载器(由于webpack只能解析js文件，需要借助loader)
+		解析js文件，并输出
+		解析css文件  css-loader
+		解析sass、less、scss、stylus文件   sass-loader/less-loader/node-sass
+		解析图片(png、jpg、svg、gif)   file-loader/url-loader
+		给css添加前缀    postcss-loader、autoprefixer
+	
+
+	
+【npm发布插件】		
+	创建用户www.npmjs.com
+	找到要发布的插件用cmd打开
+		npm adduser    添加用户
+		npm whoami     查看用户
+		npm publish    上传文件   搞定
+	传上去需要一个文档告诉大家这么使用
+		创建一个README.md  文件
+			# vue-toast-demo
+			a mobile toast plugin for vue.
+			## Usage
+			import VueToast from 'vue-toast-demo'	
+			Vue.use(VueToast)
+			this.$toast.show('Hello,Total')
+		
+
+
+【线上部署】
+	上传的基本流程
+		1.项目开发
+		2.云服务器
+		3.注册域名
+		4.申请域名ICP备案
+		5.公安网备案
+		6.搭建服务器环境
+		7.项目发布
+		8.运营维护
+	上传到服务器的方式
+		window用户  工具
+		
+		
+		
+	
+	
+	
+	
+	
+
+
