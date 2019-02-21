@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <custom-one></custom-one>
+    <custom-two></custom-two>
+</div>
+<!--
+兄弟组件
+第一种方法：先父子传  再子父传
+第二种方法：bus
+-->
+<script>
+    var bus=new Vue({});
+    Vue.component("custom-one", {
+        template: `
+             <div>
+               哥哥
+               <button @click="send">发送</button>
+             </div>
+       `,
+        data(){
+            return {
+                oldbrother:"老哥"
+            }
+        },
+        methods: {
+            send(){
+                console.log(1);
+                bus.$emit("receve",this.oldbrother)
+            }
+        }
+    });
+    Vue.component("custom-two", {
+        template: `
+          <div>
+             弟弟{{newbrother}}
+          </div>
+       `,
+        data(){
+          return{
+              newbrother:""
+          }
+        },
+        methods:{
+            get(){
+                //  $on接收事件 也相当于绑定事件  使用箭头函数不改变this指向，否则this会指向
+                bus.$on("receve",(res)=>{
+                    this.newbrother=res
+                })
+            }
+        },
+        mounted(){
+           this.get()
+        }
+    });
+    new Vue({
+        el: "#app",
+        data: {},
+        methods: {}
+    })
+</script>
+</body>
+</html>

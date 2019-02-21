@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- Prop向子组件传递数据 注册一些自定义特性 -->
+    <!-- <div id="app">
+       <blog-post title="你好"></blog-post> 
+       <h3>{{title}}</h3>
+    </div>
+    <script>
+        Vue.component("blog-post",{
+            // 声明  porps
+            props:["title"],
+            template:"<h3>{{title}}</h3>"
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                title:"孙继伟"
+            }
+        })
+    </script> -->
+
+    <!-- 结合数组使用 -->
+    <!-- <div id="app">
+        <blog-post v-for="item in sites" :todo="item"></blog-post>
+    </div>
+    <script>
+        Vue.component("blog-post",{
+            props:["todo"],
+            template:"<p>{{todo.text}}</p>"
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                sites:[
+                    {text:"sun"},
+                    {text:"jiwei"},
+                    {text:"sunjiwei"}
+                ]
+            }
+        })
+    </script> -->
+
+    <!-- is属性的使用 -->
+    <div id="app">
+        <ul>
+            <li is="blog-post" v-for="item in sites" :todo="item"></li>
+        </ul>
+        </div>
+        <script>
+            Vue.component("blog-post",{
+                props:["todo"],
+                template:"<li>{{todo.text}}</li>"
+            })
+            new Vue({
+                el:"#app",
+                data:{
+                    sites:[
+                        {text:"sun"},
+                        {text:"jiwei"},
+                        {text:"sunjiwei"}
+                    ]
+                }
+            })
+        </script>
+</body>
+</html>

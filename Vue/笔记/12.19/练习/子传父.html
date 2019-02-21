@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+<!--
+子传父
+-->
+<div id="app">
+    <father></father>
+</div>
+<script>
+    Vue.component("father",{
+       template:`
+        <div>
+           我是父组件
+           <div>{{message}}</div>
+           <son @receve="get"></son>
+        </div>
+       `,
+        data(){
+            return{
+                message:""
+            }
+        },
+        methods:{
+            get(val){
+                this.message=val
+            }
+        }
+    });
+    Vue.component("son",{
+       template:`
+         <div>
+            我是子组件
+            <button @click="send">按钮</button>
+         </div>
+       ` ,
+        methods:{
+            send(){
+                this.$emit("receve",this.message)
+            }
+        },
+        data(){
+            return{
+                message:"子传父"
+            }
+        }
+    });
+    new Vue({
+        el:"#app",
+        data:{
+        }
+    })
+</script>
+</body>
+</html>

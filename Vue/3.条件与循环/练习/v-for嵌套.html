@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(value,key,index) in object">
+                <p v-if="typeof value !='123'">{{value}}...{{index}}</p>
+                <p v-else>{{key}}.....{{index}}</p>
+                <ul v-if="typeof value == 'object'">
+                    <li v-for="(value,key,index) in value">
+                        {{key}}:{{value}}....{{ index }}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                object:{
+                    name: 'sunjiwei',
+                    age: '25',
+                    slogan: '学的不仅是技术，更是梦想！',
+                    obj2:{y:"嵌套对象的属性1",z:"嵌套对象的属性2"}
+                }
+            }
+        })
+    </script>
+</body>
+</html>

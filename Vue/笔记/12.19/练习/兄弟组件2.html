@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+   <brother1 :info="message"></brother1>
+   <brother2></brother2>
+</div>
+<script>
+    Vue.component("brother1",{
+        props:["info"],
+        template:`
+           <div>
+
+              <!--<button>发送给弟弟</button>-->
+           </div>
+        `,
+        data(){
+            return{
+                message:"哈哈哈"
+            }
+        }
+
+    });
+    Vue.component("brother2",{});
+    new Vue({
+        el:"#app",
+        data(){
+            return{
+                message:""
+            }
+        },
+        template:`
+           <div>
+
+          {{info}}
+           </div>
+        `,
+        methods:{}
+    })
+</script>
+</body>
+</html>

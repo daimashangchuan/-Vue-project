@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="单击后增加" @click="m+=1">
+        <input type="button" value="单击后增加" @click="add">
+        <input type="button" value="单击后增加" @click="add2(3,4)">
+        <div>按钮被点击了{{m}}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                m:0
+            },
+            methods:{
+                add:function(e){
+                    e.stopPropagation()
+                    this.m += 2;
+                },
+                add2:function(m,n){
+                    this.m = m+n
+                }
+            }
+        })
+    </script>
+</body>
+</html>

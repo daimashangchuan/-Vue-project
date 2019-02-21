@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+    <style>
+        .gray{
+            border: 10px solid green;
+        }
+        .gray1{
+            border: 10px solid #ccc;
+        }
+        .ft{
+            color: white;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+<!--
+v-bind 绑定  class style src href
+class绑定类名的方式有几种：  三种： 对象 数组 字符串
+-->
+<div id="app">
+    <div v-bind:class="{gray}" style="width: 100px;height: 100px;background: red"></div>  <!--对象-->
+    <div v-bind:class="{gray:active}" style="width: 100px;height: 100px;background: red"></div>  <!--对象-->
+    <div v-bind:class="a" style="width: 100px;height: 100px;background: red"></div>   <!--字符串-->
+    <div v-bind:class="[a,b]" style="width: 100px;height: 100px;background: red">
+        342534天
+    </div>  <!--数组-->
+    <div v-bind:class="seen?a:b" style="width: 100px;height: 100px;background: red">
+    </div>  <!--可以写成js语法-->
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            seen:false,
+            gray:true, //为了表示绑定上的gray是存在的 ,
+            active:true,
+            a:"gray1",
+            b:"gray"
+        }
+    })
+</script>
+</body>
+</html>

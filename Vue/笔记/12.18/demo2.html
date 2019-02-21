@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--还可以用来绑定元素属性-->
+<!--
+v-bind是 指令，将这个元素节点的 title 特性和 Vue 实例的 message 属性保持一致。
+v-for 指令可以绑定数组的数据来渲染一个项目列表：
+-->
+<div id="app">
+    <span v-bind:title="message" v-if="seen">
+        鼠标悬停几秒查看效果
+    </span>
+    <ol>
+        <li v-for="todo in todos">
+            {{todo.text}}
+        </li>
+    </ol>
+</div>
+<script>
+    var app2=new Vue({
+        el:"#app",
+        data:{
+            message:"页面加载时间是："+new Date().toLocaleString(),
+            seen:true,  //app2.seen = false  会隐藏
+            todos:[
+                {text:"第一条数据"},
+                {text:"第二条数据"},
+                {text:"第三条数据"}   //app2.todos.push({text:"第四条数据"})  列表最后会插入新的数据
+            ]
+        }
+    })
+</script>
+</body>
+</html>

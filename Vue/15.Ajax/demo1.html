@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+</head>
+<body>
+    <div id="box">
+        <button @click="get()">点我异步获取数据(Get)</button>
+    </div>
+    <script>    
+        window.onload = function(){
+            var vm = new Vue({
+                el:"#box",
+                data:{
+                    msg:'Hello World!',
+                },
+                methods:{
+                    get:function(){
+                        this.$http.get("nihao.txt").then(function(str){
+                            document.write(str.body);  
+                        }),function(){
+                            console.log('请求失败处理');
+                        }
+                    }
+                }
+            })          
+        }
+    </script>
+</body>
+</html>

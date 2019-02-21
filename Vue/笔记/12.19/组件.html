@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+组件 ：
+  全局组件:   父子 子父 兄弟  （同级组件）
+  局部组件:
+还可以分为：
+  基础组件 ： 模态框
+  业务组件 ：带有复杂逻辑，涉及到大型业务处理
+  router-view.vue ：承载html 数据获取 页面交互等功能
+组件重要的api:
+  prop
+  slot
+  event
+-->
+<div id="app">
+    <custom></custom>
+    <custom-list></custom-list>
+</div> 
+<script>
+    //全局组件
+    Vue.component("custom", {
+        //用模板字符串可以换行
+        template: `
+             <div>
+                <div>1324354</div>
+                <div>{{message}}</div>
+                <button @click="send">按钮</button>
+             </div> 
+       `,
+        methods: {
+            send(){
+                console.log(1);
+            }
+        },
+        data() {
+            return {
+                message: "hello"
+            }
+        }
+    });
+    /*Vue.component("custom",{
+        template:`
+           <div>{{message}}
+           <button @click="send">按钮</button></div>
+        `,
+        data(){
+            return{
+                message:"你好"
+            }
+        },
+        methods:{
+            send(){
+                this.message="我不好"
+            }
+        }
+    });*/
+    new Vue({
+        el: "#app",
+        data: {},
+        methods: {
+            send(){
+                console.log(1);
+            }
+        },
+        components: {
+            "custom-list": {
+                template: `
+                <div>
+                   <div>我是局部组件</div>
+                </div>
+                `
+            }
+        }
+    })
+</script>
+</body>
+</html>

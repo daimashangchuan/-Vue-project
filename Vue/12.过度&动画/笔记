@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+</head>
+<body>
+    <transition>
+        <table v-if="items.length > 0">
+            <!-- ... -->
+        </table>
+        <p v-else>没有查到您找的内容</p>
+    </transition>
+    <!-- 
+        注意在相同标签名的元素切换时
+        通过key特性设置唯一的值来标记
+        否则Vue为了效率替换相同标签内部的内容
+    -->
+    <transition>
+        <button v-if="isEditing" key="save">
+              Save
+        </button>
+        <button v-else key="edit">
+              Edit
+        </button>
+    </transition>
+    <!-- 
+        最终写为 
+        同一个元素的 key 特性设置不同的状态
+    -->
+    <transition>
+        <button v-bind:key="isEditing">
+            {{ isEditing ? 'Save' : 'Edit' }}
+        </button>
+    </transition>
+</body>
+<body>
+    <transition>
+        <button v-if="docState === 'saved'" key="saved">
+            Edit
+        </button>
+        <button v-if="docState === 'edited'" key="edited">
+            Save
+        </button>
+        <button v-if="docState === 'editing'" key="editing">
+            Cancel
+        </button>
+    </transition>
+    <!-- 可以写为 -->
+    <transition>
+        <button v-bind:key="docState">
+            {{ buttonMessage }}
+        </button>
+    </transition>
+    <script>
+        new Vue({
+            el:"",
+            data:{},
+            computed:{
+                buttonMessage: function () {
+                    switch (this.docState) {
+                        case 'saved': return 'Edit'
+                        case 'edited': return 'Save'
+                        case 'editing': return 'Cancel'
+                    }
+                }
+            }
+        })
+    </script>
+
+    <!-- 
+        多个元素的过渡 会出现一个bug 
+        消失的组件过程需要2秒，出来的组件显示过程需要1s
+        .center 相对于 .content 绝对定位。
+    -->
+    <div class="content f-cb" style="position:relative;">
+        <transition><!--把想要过渡的组件放在transition标签内-->
+            <router-view class="center" style="position: absolute;top:0;left:0;"></router-view>
+        </transition>
+    </div>
+
+    <!-- 
+        组件完全消失好，出来的组件在显示出来
+        in-out：新元素先进行过渡，完成之后当前元素过渡离开。 
+        out-in：当前元素先进行过渡，完成之后新元素过渡进入。
+    -->
+    <div class="content f-cb" style="position:relative;">
+        <transition mode="out-in"><!--把想要过渡的组件放在transition标签内-->
+            <router-view class="center" style="position: absolute;top:0;left:0;"></router-view>
+        </transition>
+    </div>
+</body>
+</html>

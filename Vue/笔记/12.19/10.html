@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+    <style>
+        .box{
+            width: 200px;
+            height: 100px;
+            border: 2px solid #6b6a6f;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="box" v-pic="item.url" v-for="(item,index) in list" :key="index"></div>
+</div>
+<script>
+    //自定义指令 第一个参数是指令名称
+    //实现百度图片加载
+    Vue.directive("pic", {
+        //钩子函数：
+
+        //bind 只调用一次，只在指令绑定元素上第一次执行
+        bind(){
+//            console.log(arguments);
+        },
+        //inserted 被绑元素插入父节点时，被调用
+        inserted(el,binding){        //el指代当前元素   binding：当前的指令的具体属性
+//            console.log(arguments);
+            //需要产生随机颜色
+            var color=Math.floor(Math.random()*1000000);
+            //把颜色赋给当前元素
+            el.style.background="#"+color;
+            //实例图片  构建出Image标签
+            var img=new Image();
+            console.log(binding);
+            //把value值 赋给图片路径
+            img.src=binding.value;
+            //图片等待加载  加载出来的时候 才能把图片显示出来
+            img.onload=function (){
+                el.style.backgroundImage="url("+binding.value+")"
+            }
+        }
+    });
+    //rawName 显示指令
+    new Vue({
+        el: "#app",//挂载元素
+        data:{
+            list:[
+                {"url":"./img/1.jpg"},
+                {"url":"./img/2.jpg"},
+                {"url":"./img/3.jpg"}
+            ]
+        }
+    });
+</script>
+</body>
+</html>

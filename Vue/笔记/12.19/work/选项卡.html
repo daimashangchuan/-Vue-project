@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .tabs li{
+            float: left;
+            margin-right: 8px;
+            list-style: none;
+            text-align: center;
+        }
+        #app{
+            width: 600px;
+            height: 200px;
+            margin: 0 auto;
+            border: 1px solid #000;
+        }
+        .tabs .tab-link {
+            display: block;
+            width: 250px;
+            height: 49px;
+            text-align: center;
+            line-height: 49px;
+            background-color: #5597B4;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .tabs .tab-link.active {
+            height: 47px;
+            border-bottom: 2px solid #E35885;
+            transition: .3s;
+        }
+
+        .cards {
+            float: left;
+        }
+
+        .cards .tab-card {
+            display: none;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+
+        .clearfix {
+            zoom: 1;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <ul class="tabs">
+        <li v-for="item in arr" @click="change">
+            {{item.text}}
+        </li>
+    </ul>
+    <div class="cards">
+        <div class="tab-card" style="display: block;">内容一</div>
+        <div class="tab-card">内容2</div>
+        <div class="tab-card">内容3</div>
+    </div>
+</div>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+            arr:[
+                {"text":"标题一"},
+                {"text":"标题二"},
+                {"text":"标题三"}
+            ]
+        },
+        methods:{
+            change(){
+
+            }
+        }
+    })
+</script>
+</body>
+</html>

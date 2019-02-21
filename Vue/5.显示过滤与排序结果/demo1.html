@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 创建返回过滤或排序数组的计算属性 -->
+    <!-- <div id="app">
+        <li v-for="n in even">{{n}}</li>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                numbers: [ 1, 2, 3, 4, 5 ]
+            },
+            computed:{
+                even:function () {
+                    return this.numbers.filter(function(number){
+                        return number % 2 === 1      
+                    })
+                }    
+            }
+        })
+    </script> -->
+
+    <!-- 计算属性不适用的情况下 (例如，在嵌套 v-for 循环中) 你可以使用一个 method 方法 -->
+    <div id="app">
+        <li v-for="n in even(numbers)">{{n}}</li>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                numbers:[1,2,3,4,5,6]
+            },
+            methods:{
+                even:function(numbers){
+                    return numbers.filter(function(number){
+                        return number%2 ===1
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

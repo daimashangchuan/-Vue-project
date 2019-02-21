@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+子父
+-->
+<div id="app">
+    <custom></custom>
+</div>
+<script>
+    //子传父  $emit
+    Vue.component("custom", {
+        //必须设置根元素
+        template: `
+             <div>
+                我是父组件
+                <div>{{getChild}}</div>
+                <custom-list @receve="get"></custom-list>
+             </div>
+        `,
+        methods:{
+            get(val){
+                console.log(arguments);
+                this.getChild=val
+            }
+        },
+        data(){
+            return{
+                getChild:""
+            }
+        }
+    });
+    Vue.component("custom-list",{
+       template:`
+          <div>
+          我是子组件
+          <button @click="send">发送</button>
+          </div>
+       `,
+        data(){
+            return{
+                child:"子信息"
+            }
+        },
+        methods:{
+            send(){
+                // $emit 第一个参数为自定义事件
+                //第二个参数为发送的数据
+                this.$emit("receve",this.child)
+
+            }
+        }
+
+    });
+    new Vue({
+        el: "#app",
+        data:{},
+        methods:{}
+    })
+</script>
+</body>
+</html>

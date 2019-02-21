@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+    <!-- 所有执行的都是动态的 -->
+    <div id="app">
+        <!-- 定义一个点击事件  .prevent 取出默认 event.preventDafault()-->
+        <form @submit.prevent="addNewTodo">
+            <!-- v-model 双向绑定数据 -->
+            <input  v-model="newTodoText">
+            <button>Add</button>
+        </form>
+        <ul>
+            <!-- is属性 相当于  <todo-item></todo-item>-->
+            <!-- is 父元素有固定的子元素 可以避开一些潜在的浏览器解析错误 -->
+            <li is="todo-item"
+                v-for="(todo, index) in todos"
+                :key="todo.id"
+                :title="todo.title"
+                @remove="todos.splice(index, 1)"> 
+            </li>
+        </ul>
+    </div>
+    <script> 
+        //  自定义创建一个 <todo-item></todo-item>   组件
+       Vue.component('todo-item', {
+           // 模板
+           //  "$emit()    激活自定义的事件
+            template: `
+                <li>
+                {{ title }}
+                    <button @click="$emit('remove')">Remove</button>
+                </li>
+            `,
+            // 声明 props  可以传递数据   子组件可以拿到父组件的数据
+            props: ['title']
+        })
+
+    new Vue({
+        el: '#app',
+        data: {
+            // 初始一个空值
+            newTodoText: '',
+            //  v-for  循环
+            todos: [
+                {
+                    id: 1,
+                    title: 'Do the dishes',
+                },
+                {
+                    id: 2,
+                    title: 'Take out the trash',
+                },
+                {
+                    id: 3,
+                    title: 'Mow the lawn'
+                }
+            ]
+        },
+        // 方法
+        methods: {
+            //  添加   
+            addNewTodo: function () {
+                this.todos.push({
+                    id: this.nextTodoId++,
+                    title: this.newTodoText
+                })
+                //  清空  input
+                this.newTodoText = ''
+            }
+        }
+    })
+    </script>
+</body>
+</html>

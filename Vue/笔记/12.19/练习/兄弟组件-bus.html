@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <brother1></brother1>
+    <brother2></brother2>
+</div>
+<script>
+    var bus=new Vue({});
+    Vue.component("brother1",{
+        template:`
+           <div>
+              我是哥哥
+              <button @click="send">发送给弟弟</button>
+           </div>
+        `,
+        data(){
+            return{
+                message:"哈哈哈"
+            }
+        },
+        methods:{
+            send(){
+                bus.$emit("receve",this.message)
+            }
+        }
+    });
+    Vue.component("brother2",{
+        template:`
+           <div>
+               我是弟弟
+               {{message}}
+           </div>
+        `,
+        data(){
+            return{
+                message:""
+            }
+        },
+        methods:{
+            get(){
+               bus.$on("receve",(val)=>{
+                   this.message=val
+               })
+            }
+        },
+        mounted(){
+            this.get()
+        }
+    });
+    new Vue({
+        el:"#app"
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{message}}</p>
+    <input type="button" v-on:click="change" value="change">
+</div>
+<script>
+    var app3=new Vue({
+        "el":"#app",
+        "data":{
+            message:"hello vue.js"
+        },
+        methods:{
+            change:function(){
+                this.message=this.message.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+</body>
+</html>

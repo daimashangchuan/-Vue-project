@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 数组方法 -->
+    <!-- <div id="app">
+        <div v-for="item in items" :key="item.id">{{item}}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                items:[
+                    {id:1,name:"sunjiwei"},
+                    {id:2,name:"zhangsan"},
+                    {id:3,name:"lisi"},
+                    {id:4,name:"wangwu"}
+                ]
+            }
+        }) 
+        vm.items.push({id:5,name:"zhouliu"})
+    </script> -->
+
+    <!-- 
+        注意事项 
+        1.利用索引设置项时无效
+    -->
+    <div>
+        <p>{{items}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"div",
+            data:{
+                items:[1,2,3]
+            }
+        })
+        // vm.items[1] = "x" // 不响应
+        vm.items.length = 10 // 响应
+        // 解决方法  1.利用索引设置项时无效
+        Vue.set(vm.items,8,"x")
+        vm.items.splice(2,1,"a")  
+    </script>
+</body>
+</html>

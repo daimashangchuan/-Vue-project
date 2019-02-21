@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+    <style>
+        div{
+            margin: 0 auto;
+        }
+        table{
+            border: 1px solid #333;
+            border-collapse: collapse;
+            border-spacing: 1px;
+        }
+        th,td{
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>购买数量</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for="iphone in json">
+                <td>{{ iphone.id }}</td>
+                <td>{{ iphone.name }}</td>
+                <td>{{ iphone.price }}</td>
+                <td>
+                    <button :disabled="iphone.count === 0" @click="iphone.count-=1">-</button>
+                    {{ iphone.count }}
+                    <button @click="iphone.count+=1">+</button>
+                </td>
+                <td>
+                    <button @click="iphone.count=0">移除</button>
+                </td>
+            </tr>
+        </table>
+        总价：${{totalPrice()}}
+    </div>
+    <script>    
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                json:[
+                    {id:1,name:"sunjiwe",price:88888,count:1},
+                    {id:1,name:"华为",price:66666,count:1},
+                    {id:1,name:"oppo",price:66666,count:1},
+                    {id:1,name:"viwo",price:55555,count:1}
+                ]
+            },
+            methods:{
+                totalPrice:function(){
+                    var total = 0;
+                    for (let i = 0; i < this.json.length; i++) {
+                        total += this.json[i].price*this.json[i].count;                            
+                    }
+                    return total
+                }
+            }
+        })
+    </script>
+</body>
+</html>

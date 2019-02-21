@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>点击元素输出元素内容</p>
+        <ol>
+            <li is="todo-item" v-for="item in items" :todo="item" @click.native="alert(item.text)"></li>
+        </ol>
+    </div>
+    <script>    
+        Vue.component('todo-item',{
+            props:['todo'],
+            template:'<li>{{todo.text}}</li>'
+        })
+        new Vue({
+            el:"#app",
+            data:{
+                items:[
+                    {text:"sun"},
+                    {text:"jiwei"},
+                    {text:"sunjiwei"}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

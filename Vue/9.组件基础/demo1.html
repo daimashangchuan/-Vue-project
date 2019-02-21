@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 全局组件 -->
+    <!-- <div id="app">
+        <button-counter></button-counter>
+    </div>
+    <script>
+        //  注册
+        Vue.component('button-counter',{
+            template:"<h1>自定义组件</h1>"
+        })
+        //  创建跟实例
+        new Vue({
+            el:"#app"
+        })
+    </script> -->
+
+    <!-- 局部组件 -->
+    <!-- 在实例选项中注册局部组件，这样组件只能在这个实例中使用 -->
+    <!-- button-counter只能在 #qpp中使用 -->
+    <!-- <div id="app">
+        <button-counter></button-counter>
+    </div>
+    <script>
+        var Child = {
+            template:"<h1>自定义组件</h1>"
+        }
+        new Vue({
+            el:"#app",
+            //  注册局部组件
+            components:{
+                //  <button-counter> 将只在父模板可用
+                "button-counter":Child
+            }
+        })
+    </script> -->
+
+    <!-- 示例 -->
+    <div id="app">
+        <sunjiwei></sunjiwei>
+    </div>
+    <script>    
+        Vue.component("sunjiwei",{
+            template:"<button v-on:click='count++'>点我{{count}}</button>",
+            data:function(){
+                return {
+                    count:0
+                }    
+            }
+        })
+        new Vue({
+            el:"#app"
+        })
+    </script>
+</body>
+</html>

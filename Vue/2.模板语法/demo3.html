@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 用户输入 1 -->
+    <!-- <div id="app">
+         <p>{{message}}</p>
+         <input v-model="message">
+    </div>
+    <script>    
+        new Vue({
+            el:"#app",
+            data:{
+                message:"Runoob"
+            }
+        })
+    </script> -->
+
+    <!-- 用户输入 2 反转 -->
+    <!-- <div id="app">
+        <p>{{message}}</p>
+        <button @click="reverseMessage">反转</button>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                message:"sunjiwe"
+            },
+            methods:{
+                reverseMessage:function(){
+                    this.message = this.message.split("").reverse().join("")
+                }
+            }
+        })
+    </script> -->
+
+    <!-- 过滤器 用作一些常见的文本格式化 -->
+    <div id="app">
+        {{message|capitalize}}
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                message:"sunjiwei"
+            },
+            filters:{
+                capitalize:function(value){
+                    if(!value) return ""
+                    value = value.toString();
+                    return value.charAt(0).toUpperCase()+value.slice(1);
+                }        
+            }
+        })
+    </script>
+</body>
+</html>

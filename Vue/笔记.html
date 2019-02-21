@@ -1,0 +1,724 @@
+vue.js 是一套构建用户界面的渐进式框架
+	只关注视图层，采用自底向上增量开发的设计
+	通过简单的API实现响应式的数据绑定和组合的视图组件
+【】	
+	
+【Vue.js的安装】
+	1.直接在官网下载   vue.min.js
+	2.https://vue/dist/vue.js(和 npm 发布的最新的版本一致)
+	3.https://cdn.staticfile.org/vue/2.2.2/vue.min.js
+	
+	npm -v  // 查看版本号
+	
+	cnpm install npm -g  // 升级   npm
+	
+	npm install cnpm -g  // 升级或安装 cnpm
+	
+	cnpm install vue   //  最新最稳定
+
+【Vue.js的目录结构】
+	build	项目构建(webpack)相关代码
+	config  配置目录，包括端口号。
+	node_modules  npm加载的项目依赖模块
+	src   开发的目录
+	static  静态资源目录   图片，字体等
+	test    初始测试目录   可删
+	.xxx文件     配置文件  包括语法配置，git配置等
+	index.htlm   入口文件  
+	package.json   项目配置文件
+	README.md    项目说明文档
+		
+
+【vue.js 起步】
+	1.demo1
+		el参数    用来获取元素   标签 class id
+		data用于定义属性
+		methods用于定义函数，可以通过return来返回函数值
+		{{}} 双括号  用于输出对象属性和函数返回值
+	2.demo2
+		在vue实例中被创建时，它向vue响应式系统中加入了其data对象中能找到的所有属性
+		当这些属性的值发生改变时，html视图也会产生相应的变化
+	3.demo3
+		除了数据属性，vue实例还提供了一些有用的实例属性方法。
+		它们有前缀$,以便于用户定义属性区分开来
+
+【模板语法】
+	1.demo1
+		文本  {{}} 文本插值
+		使用 v-html指令用于输出html代码
+		属性  	判断 class1 的值，如果为 true 使用 class1 类的样式
+				否则不使用该类
+	2.demo2
+		表达式   vue提供了javascript表达式支持
+		指令  带有  v-  前缀
+		参数  在指令后以冒号指名
+			v-bind 指令被用来响应地更新 HTML 属性：
+		修饰符   .指明的特殊后缀
+			列如 .prevrnt修饰符告诉 v-on指令对于触发的事件调用
+					event.preventDefault()
+	3.demo3
+		用户输入 v-model指令  双向数据绑定
+		过滤器(filters) 用作一些常见的文本格式化  |  
+			<!-- 在两个大括号中 -->
+			{{ message | capitalize }}
+			<!-- 在 v-bind 指令中 -->
+			<div v-bind:id="rawId | formatId"></div>
+
+		v-bind  缩写为  :
+		v-on    缩写为  @
+
+在data观测的对象中添加新属性 不能直接添加  必须用vue.set方法
+Vue.set方法可以确保属性被创建出来也是响应的
+
+【条件与循环】
+	一.条件
+		v-if指令 用来条件判断
+		v-else 指令给 v-if 添加一个 "else" 块，紧跟在 v-if后面
+		v-else-if指令 可以链式的多次使用
+		v-show指令来根据条件展示元素
+
+v-if 是真实的条件渲染，因为它会确保条件块在切换当中适当地销毁与重建条件块内的事件监听器和子组件。
+v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——在条件第一次变为真时才开始局部编译（编译会被缓存起来）。	
+v-show 简单得多——元素始终被编译并保留，只是简单地基于 CSS 切换
+
+v-if 有更高的切换消耗而 v-show 有更高的初始渲染消耗
+如果需要频繁切换使用 v-show 较好
+如果在运行时条件不大可能改变则使用 v-if 较好
+
+	二.循环
+		基本循环[]
+		迭代对象{}
+		模板中使用template		
+	三.练习
+		key
+		迭代
+		v-for嵌套
+		九九乘法表
+		组件与v-for
+			组件有自己独立的作用域  用prop来迭代传递
+
+v-for 默认行为试着不改变整体，而是替换元素。迫使其重新排序的元素
+要使其重新排序的元素，你需要提供一个 key 的特殊属性
+
+
+【数组与对象更新检测】
+ 一 数组
+	1.变异方法
+		push() pop() shift() unshift() splice() sort() reverse()	
+	2.非变异方法
+		filter(), concat() 和 slice()
+用一个含有相同元素的数组去替换原来的数组
+	【注意事项】
+		1.利用索引设置项时无效
+		vm.items[indexOfItem] = newValue
+ 二 对象
+	Vue 不能检测对象属性的添加或删除(javascript限制)
+
+【显示过滤/排序结果】
+	显示一个数组的过滤或排序副本，而不实际改变或重置原始数据
+	计算属性与methods
+  
+
+【计算属性 computed 与 $watch】
+	1.demo1
+		基础列子
+		计算属性computed 与 data方法methods
+			不同的是计算属性是基于它的依赖缓存。计算属性只有在它的相关依赖发生改变时才会重新取值
+			重新渲染的时候,method 调用总会执行函数
+	2.demo2
+		computed的setter
+			computed 属性默认只有 getter ，不过在需要时你也可以提供一个 setter
+		computed 与 $watch(侦听属性)
+			$watch用于观察 Vue 实例上的数据变动一般不用
+	3.demo3	
+		侦听器 watch
+			需要在数据变化时执行异步或开销较大的操作时
+			允许我们执行异步操作 (访问一个 API)，限制我们执行该操作的频率，
+			并在我们得到最终结果前，设置中间状态
+
+【监听事件】
+	1.demo1
+		v-on指令 监听DOM事件
+		v-on指令 接收方法来调用
+		v-on指令 内联处理器中的方法
+			内联访问原始的 DOM 事件   用特殊变量 $event当做实参传到函数中
+	2.demo2
+		通过监听属性 watch 来响应数据变化
+		计数器
+		千米与米换算
+	3.demo3
+		通过vue监听事件实现一个简单的购物车	
+	4.demo4
+		点击按钮的不同操作
+
+【表单绑定】
+	1.demo1
+		input和textarea 元素双向绑定 v-model
+		单个复选框与多个复选框
+			多选框是通过value获取内容   绑定在同一个数组中
+	2.demo2
+		单选按钮
+		选择框
+		多选框(绑定在字符串)
+			multiple  可同时实现多个选项
+	3.demo3
+		v-for 渲染动态选项
+			与v-bind结合使用动态改变绑定的值
+		值绑定
+	4.demo4
+		全选与取消全选
+
+表单修饰符
+	.lazy 相对于使用了change事件
+	.number 将输入值转化为数值类型
+	.trim 首尾空白字符
+	
+
+【组件基础】
+	语法格式
+		Vue.componpent(tagName,options)
+		tagNmae 组件名    options为配置选项
+		组件是可复用的 Vue 实例
+	demo1(组件的创建方式)
+		全局组件
+		局部组件
+		示例
+	demo2
+		组件的复用
+		data必须是一个函数
+	demo3(通过Prop向子组件传递数据)
+		注册一些自定义特性
+			myMessage 转化为 my-message  
+		结合数组
+		is 属性 将组件绑定在元素上
+	demo4
+		动态Prop (父组件改变 子组件也变化)
+		单个根元素  (以数组的形式)
+		Prop 验证
+			String Number Boolean Function Object Array
+			type 可以是一个自定义构造器，使用 instanceof 检测。
+	demo5
+		自定义事件
+			$on(eventName)用来监听事件
+			$emit(eventName)触发事件
+		父组件给子组件传入一个变量参数
+	demo6
+		子组件通过 $emit 触发父组件的方法时，
+		如果需要传递参数，可在方法名后面加参数数组。	
+		$emit("FunctionName") 
+		$emit("FunctionName",[arg1,arg2...])。
+	domo7
+		点击事件
+
+【注意】
+	一
+	<!-- 传递了一个字符串"1" -->
+	<comp some-prop="1"></comp>
+	<!-- 传递实际的数字 -->
+	<comp v-bind:some-prop="1"></comp>
+	二
+	1.<input v-model="searchText">等价于<input v-bind:value="searchText" v-on:input="searchText = $event.target.value">
+
+	2.在组件上使用<custom-input v-bind:value="searchText" v-on:input="searchText = $event" ></custom-input>
+		为了它正常工作，这个组件内的 <input> 必须：
+			将其 value 特性绑定到一个名叫 value 的 prop 上
+			在其 input 事件被触发时，将新的值通过自定义的 input 事件抛出
+
+				Vue.component('custom-input', {
+					props: ['value'],
+					template: `
+					<input
+						v-bind:value="value"
+						v-on:input="$emit('input', $event.target.value)"
+					>
+					`
+				})
+		现在可以完美的使用组件了<custom-input v-model="searchText"></custom-input>	
+
+【自定义事件】
+	注册指令 directives => 创建组件的 component		
+	指令定义的钩子函数
+		bind 调用一次，指令第一次绑定到元素时调用
+		inserted 被绑定元素插入父节点是调用
+		undate 被绑定元素在更新时调用 不论绑定值是否变化			
+		omponentUpdated: 被绑定元素所在模板完成一次更新周期时调用
+		unbind: 只调用一次， 指令与元素解绑时调用。		
+	钩子函数的参数
+		el: 指令所绑定的元素，可以用来直接操作 DOM 。
+		binding: 一个对象，包含以下属性：
+			name: 指令名，不包括 v- 前缀。
+			value: 指令的绑定值， 例如： v-my-directive="1 + 1", value 的值是 2。
+			oldValue: 指令绑定的前一个值，仅在 update 和 componentUpdated 钩子中可用。无论值是否改变都可用。
+			expression: 绑定值的表达式或变量名。 例如 v-my-directive="1 + 1" ， expression 的值是 "1 + 1"。
+			arg: 传给指令的参数。例如 v-my-directive:foo， arg 的值是 "foo"。
+			modifiers: 一个包含修饰符的对象。 例如： v-my-directive.foo.bar, 修饰符对象 modifiers 的值是 { foo: true, bar: true }。
+			vnode: Vue 编译生成的虚拟节点。
+			oldVnode: 上一个虚拟节点，仅在 update 和 componentUpdated 钩子中可用。			
+	demo1
+		全局注册指令  input自动获取焦点 页面载入时
+		局部注册指令		
+	demo2
+		指令的钩子函数练习			
+
+【过度&动画】
+语法格式
+<transition name = "nameoftransition">
+	<div></div>
+</transition>
+	Vue在插入，更新或者移除DOM时，提供多种不同方式的应用过度效果
+		在 CSS 过渡和动画中自动应用 class
+		可以配合使用第三方 CSS 动画库，如 Animate.css
+		在过渡钩子函数中使用 JavaScript 直接操作 DOM
+		可以配合使用第三方 JavaScript 动画库，如 Velocity.js
+	Vue提供了内置的过度封装组件，transition			
+		条件渲染 (使用 v-if)
+		条件展示 (使用 v-show)
+		动态组件
+		组件根节点	
+	demo1
+		显示隐藏(6个class来切换)
+		点击第一次时
+			v-enter过度开始状态
+			v-enter-active过度生效时状态 (过度时间,动画类名)
+			v-enter-to过度的结束状态
+		点击第二次时
+			v-leave 离开过度的开始状态
+			v-leave-active 离开过度生效时的状态
+			v-leave-to离开过度的结束状态
+		CSS 过渡		
+			<transition name="fade"></transition>将 v-enter 会替换为 fade
+	demo2	
+		CSS 动画 
+	demo3
+		自定义过度的类名 可以与animate.css动画一起使用
+		 	enter-class
+			enter-active-class
+			enter-to-class (2.1.8+)
+			leave-class
+			leave-active-class
+			leave-to-class (2.1.8+)
+		他们的优先级高于普通类名
+【注意】过度与动画一起使用需要type特性来声明animation或transition
+	demo4
+		Velocity.js与animate.css的工作方式类似
+	demo5	
+		多个元素的过渡
+	demo6
+		理解过渡模式
+	demo7
+		VUE列表过渡实现轮播图
+
+【状态过度】
+	数字和运算 颜色的显示 SVG 节点的位置 元素的大小和其他的属性
+	demo1
+		状态动画与侦听器   对数字的过度
+	demo2	
+		Tween.js 和 Color.js 对颜色的过度
+	demo3
+		把过渡放到组件里
+
+【混入】(mixins)
+mixins 是一种分发Vue组件中可复用功能的非常灵活的组件
+	demo1
+		基础列子
+		选项合并
+		methods 选项中有相同的函数名，则 Vue 实例优先级会较高
+	demo2
+		全局混入(谨慎使用全局混入对象，因为会影响到每个单独创建的 Vue 实例)
+
+
+【Ajax】vue-resource.min.js
+	Vue 要实现异步加载需要使用到 vue-resource 库。
+	demo1
+		get()请求
+			格式 this.$http.get('get.php',jsonData)
+			jsonData 就是传到后端的数据
+			this.$http.get('get.php',{a:1,b:2}).then(function(res){
+				document.write(res.body);    
+			},function(res){
+				console.log(res.status);
+			});
+	demo2
+		post()请求
+			向后台发送数据需要三个参数 {emulateJSON:true}。
+				作用  如果Web服务器无法处理编码为:application/json的请求
+												启用emulateJSON选项
+		
+	// 基于全局Vue对象使用http
+	Vue.http.get('/someUrl', [options]).then(successCallback, errorCallback);
+	Vue.http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
+													
+	// 在一个Vue实例内使用$http
+	this.$http.get('/someUrl', [options]).then(successCallback, errorCallback);
+	this.$http.post('/someUrl', [body], [options]).then(successCallback, errorCallback);
+	vue 提供的7中请求方式
+	get(url, [options])。。。 head(url, [options])。。。delete(url, [options]) 。。。jsonp(url, [options])
+	post(url, [body], [options])。。。 put(url, [body], [options])。。。 patch(url, [body], [options])
+
+	除了 jsonp 以外，另外 6 种的 API 名称是标准的 HTTP 方法。
+		url:目标url地址
+		body:请求体发送的数据
+		timeout:请求超时(0表示永不超时)
+		http://www.runoob.com/vue2/vuejs-ajax.html
+
+
+【响应式接口】			
+	demo1
+		$watch 属性来实现数据的监听
+			vm.$watch("目标",fn(新的,旧的))
+	demo2
+		Vue.set 方法用于设置对象的属性(添加)	
+			Vue.set( target, key, value )
+			target: 可以是对象或数组  key : 可以是字符串或数字  value: 可以是任何类型
+
+	demo3
+		Vue.delete 用于删除动态添加的属性			
+			Vue.delete( target, key )	
+			target: 可以是对象或数组   key : 可以是字符串或数字
+
+【渲染函数JSX】
+	demo1(渲染render)
+		基础列子
+	demo2
+		节点，树以及虚拟DOM
+	demo3
+		深入理解data
+	demo4
+		JavaScript 代替模板功能	
+	demo6
+		JSX语法
+	demo7	
+		函数式组件
+	demo8
+		依赖传入 props 的值的 smart-list 组件例子	
+
+【事件 & 按键修饰符】
+	 修饰符                相应前缀
+	.passive                 &
+	.capture                 !
+	.once                    ~
+	.capture.once或
+	.once.capturn            ~!	
+例如:
+	on: {
+		'!click': this.doThisInCapturingMode,
+		'~keyup': this.doThisOnce,
+		'~!mouseover': this.doThisOnceInCapturingMode
+	}
+
+	修饰符                  原生的
+	.stop              event.stopPropagation
+	.prevent           event.preventDefault
+	.self              if(event.target !== event.currentTarget) return
+	Keys:.enter,.13    if(event.keyCode !== 13) return(change 13 to another key code for other key modifiers)       
+	Modifiers Keys: .ctrl, .alt, .shift, .meta    
+	if (!event.ctrlKey) return (change ctrlKey to altKey, shiftKey, or metaKey, respectively)
+例如：
+	on: {
+		keyup: function (event) {
+		// 如果触发事件的元素不是事件绑定的元素
+		// 则返回
+		if (event.target !== event.currentTarget) return
+		// 如果按下去的不是 enter 键或者
+		// 没有同时按下 shift 键
+		// 则返回
+		if (!event.shiftKey || event.keyCode !== 13) return
+		// 阻止 事件冒泡
+		event.stopPropagation()
+		// 阻止该元素默认的 keyup 事件
+		event.preventDefault()
+		// ...
+		}
+	}
+
+【插槽】 this.$slots 或  this.$scopedSlots
+	render: function (createElement) {
+		// `<div><slot></slot></div>`
+		return createElement('div', this.$slots.default)
+	}
+
+	props: ['message'],
+	render: function (createElement) {
+		// `<div><slot :text="message"></slot></div>`
+		return createElement('div', [
+			this.$scopedSlots.default({
+			text: this.message
+			})
+		])
+	}
+
+组件需要的一切都是通过上下文传递，包括：
+	props：提供所有 prop 的对象
+	children: VNode 子节点的数组
+	slots: 返回所有插槽的对象的函数
+	data：传递给组件的数据对象，作为 createElement 的第二个参数传入组件
+	parent：对父组件的引用
+	listeners: (2.3.0+) 一个包含了所有在父组件上注册的事件侦听器的对象。这只是一个指向 data.on 的别名。
+	injections: (2.3.0+) 如果使用了 inject 选项，则该对象包含了应当被注入的属性。
+
+【注意】
+在添加 functional: true 之后，
+锚点标题组件的 render 函数之间简单更新增加 context 参数，
+this.$slots.default 更新为 context.children，
+之后this.level 更新为 context.props.level。
+
+优点：函数式组件只是一个函数，所以渲染开销也低很多
+
+【单文件组件】
+	优缺点:
+		全局定义:强制要求每个component中的命名不得重复
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+【v-on的事件修饰符】
+	.stop	    阻止点击事件继续传播  阻止事件冒泡
+	.prevent	阻止默认行为  event.preventDefault()
+	.capture	事件捕获  事件委托 
+	.self       当前元素自身触发处理函数
+	.native     在某个组件的根元素上监听一个原生事件
+2.1.4 新增
+	.once    点击事件值触发一次
+2.3.0新增
+	.passive  	滚动事件的默认行为 将会立即触发
+				而不会等待 `onScroll` 完成
+				这其中包含 `event.preventDefault()`
+				尤其能够提升移动端的性能
+注意				
+	.passive 和 .prevent 不能一起使用，因为 .prevent 将会被忽略，同时浏览器可能会向你展示一个警告。
+	.passive 会告诉浏览器你不想阻止事件的默认行为。
+
+
+【按键修饰符】
+	只有在 `keyCode` 是 13 时调用 `vm.submit()`
+	<input v-on:keyup.13="submit">
+	全部的按键别名
+	.enter .tab .delete (捕获“删除”和“退格”键) .esc .space .up .down .left .right
+	自定义按键修饰符   全局config.keyCodes
+	Vue.config.keyCodes.f1 = 112  //  f1键为 112
+2.5.0新增
+	自动匹配按键修饰符 KeyboardEvent.key
+注意
+	有一些按键 (.esc 以及所有的方向键) 在 IE9 中有不同的 key 值
+	如果你想支持 IE9，它们的内置别名应该是首选。
+
+
+【系统修饰键】
+	按下相应按键时才触发鼠标或键盘事件的监听器
+	.ctrl .alt .shift .meta
+	组合键
+	<!-- Alt + C -->
+	<input @keyup.alt.67="clear">
+	<!-- Ctrl + Click -->
+	<div @click.ctrl="doSomething">Do something</div>
+注意
+	修饰键与常规按键不同，在和 keyup 事件一起用时，事件触发时修饰键必须处于按下状态。
+	换句话说，只有在按住 ctrl 的情况下释放其它按键，才能触发 keyup.ctrl。
+	而单单释放 ctrl 也不会触发事件。如果你想要这样的行为，请为 ctrl 换用 keyCode：keyup.17。
+
+【.exact 修饰符】
+	<!-- 即使 Alt 或 Shift 被一同按下时也会触发 -->
+	<button @click.ctrl="onClick">A</button>
+	<!-- 有且只有 Ctrl 被按下的时候才触发 -->
+	<button @click.ctrl.exact="onCtrlClick">A</button>
+	<!-- 没有任何系统修饰符被按下的时候才触发 -->
+	<button @click.exact="onClick">A</button>
+
+【为什么在html中监听事件？】
+	1.轻松定位在 JavaScript 代码里对应的方法
+	2.不用在 JavaScript 里手动绑定事件
+	  ViewModel 代码可以是非常纯粹的逻辑，
+	  DOM 完全解耦，更易于测试
+	3.ViewModel被销毁时，自动删除，不需要手动删除
+
+
+
+
+【vue的生命周期及钩子函数】  
+	【beforeCreate  created】  初始化事件 进行数据观测  
+	【beforeMount  mounted】    
+	【beforeUpdate  updated】 
+	【beforeDestroy  destroyed】
+
+	一.在beforeCreate与created
+		1.初始化事件  
+		2.进行数据观测
+		3.到了created的时候数据已经和data属性进行绑定
+
+	二.created与beforeMount
+		1.判断el选项 有继续 没有停止
+		2.template 有 编译为render函数
+				   没有  将外部的Html 作为模板来编译
+		3.render函数 以createElement作为参数，做渲染
+			new Vue({
+				el: '#app',
+				render: function(createElement) {
+					return createElement('h1', 'this is createElement')
+				}
+			})
+		4.优先级排序
+			render函数》template选项》outerHTML
+
+	三. beforeMount和mounted
+		1.给vue实例对象添加$el成员
+		2.替换掉挂在的DOM元素
+
+	四.	mounted	
+		1.将dom中的内容转化为真实的内容
+
+	五.beforeUpdate和updated
+		1.data数据发生改变时会触发对应组件重新渲染虚拟DOM，先调用beforeUpdate，后调用updated
+
+	六.beforeDestroy和destroyed
+		1.beforeDestroy钩子函数在实例销毁之前调用。在这一步，实例仍然完全可用。
+		2.destroyed钩子函数在Vue 实例销毁后调用。
+			2.1 Vue实例指示所有都会解绑
+			2.2 事件监听器会被移除
+			2.3 所有子实例也会被销毁
+
+			new Vue()
+				||
+				||
+				||
+		初始化event和watch
+				||
+				||=====> beforeCreate
+				||
+		属性、方法、数据等内容的计算
+				||
+				||=====> created
+				||
+			存在el选项
+				||
+				||
+				||
+		不存在template选项
+				||
+				||=====> beforeMount
+				||
+		创建vm.$el替换el选项
+				||
+				||=====> mounted
+				||
+		   当内容发生更新
+				||
+				||=====> beforeUpdate
+				||
+			虚拟DOM重新渲染
+				||
+				||=====> updated
+				||
+			调用vm.$destroy()
+				||
+				||=====> beforeDestroy
+				||
+		卸载watcher、子组件和事件监听=====> destroyed
+
+
+
+var vm = new Vue({
+	el: "选择器",  挂载到页面的那个元素里，即确定vue的作用范围  外部可通过vm.$el访问，得到的是一个原生dom元素，可进行对应操作
+
+	a: '',  //自定义属性  外部可通过vm.$options访问
+
+	data: { }, //实例属性都在这里面，外部通过实例名,即vm.$data调用
+			
+	computed: { }, //计算属性，也是实例属性，只是以方法的形式存在，并可以有逻辑运算的属性
+			
+	method: { }, //实例方法都在这里
+			
+	watch: { }, //对data和computed的属性进行监听，当属性有变化时自动触发，以方法的形式存在 外部通过$.watch调用
+			
+	//注意：以上属性和方法，实例内部都通过this调用,外部则通过对应的实例方法访问		
+	//在vue的生命周期过程中，它自身还提供了一系列的钩子函数供我们使用，进行自定义逻辑的注入：　　　
+			
+	created: function(){ 实例已经创建 }
+			
+	beforeCompile: function(){ 模块编译之前 }
+			
+	compiled: function(){ 模块编译之后；即模板占位符被是内容替换}
+			
+	ready: function(){ 模板插入到文档中了；相当于window.onload }
+			
+	注意： 以上4个方法在对象被实例化后即按顺序执行，以下2个方法需通过事件触发，并通过调用 实例名.$destory() 才执行
+			
+	beforeDestroy: function(){ 对象销毁之前 }
+			
+	destroyed: function(){ 对象销毁之后 }
+			
+});
+
+【Vue对象解析】
+1，对象属性
+　　data、el、options、watch、computed
+
+2，对象方法
+　　生命周期之钩子函数
+
+3，对象实例访问和调用属性和方法
+　　A:实例属性调用：$options、$el、$data、$watch
+　　这里着重说下$watch，它的一般语法为：
+vm.$watch("监听的实例属性名",function() { // 对于监听数据变化后的业务处理代码 });     --浅度监听
+　　如果监听的属性是基本数据类型，上面用法是没有问题的，但如果监听的属性是对象，则对象内部的数据有变化，上面写法是监听不到的，需要进行一个参数进行深度监听
+vm.$watch("监听的实例属性名",function() { // 对于监听数据变化后的业务处理代码 },{deep: true});　　--深度监听
+　　B:实例方法调用：$mount()、$log()、$destroy()
+
+4，自带过滤器&自定义过滤器
+　　A：vue自带的过滤器有：
+　　　　capitalize(首字母大写)、uppercase、currency、json( 相当于JSON.Stringify() )、debounce(后跟秒数，配合事件，延迟执行)
+　　　　limitBy(参数1, 参数2) 常用语v-for数组，限制输出数量和从哪输出；参数1代表输出几个，参数2代表从第几个输出
+　　　　filterBy(参数) 过滤数据，过滤含有参数的数据，配合input输入框，通过输入变量过滤，打到热搜索的效果
+　　　　orderBy(参数)  对数据排序，参数为1时为正序，为-1时则倒序，其他什么参数呢？所以1和-1基本是常用情况
+　　B：自定义过滤器语法 （对于时间戳的处理是比较常用的自定义过滤器）
+    Vue.filter("过滤器名称",function(参数...){
+　　　　...  //业务处理
+　　　　return ...;
+　　});
+　　C:自定义过滤器之双向过滤器  //据说应用不多，暂且放着
+    Vue.filter("过滤器名称",{
+　　　　read: function(input) { return ... },   //model-view
+　　　　write: function(val) { return ... }　　//view-model
+　　})
+
+5，自带指令和自定义指令
+　　指令是对HTML语法的扩展，必须以v-开头，一般我们口中的指令实际是指属性指令，使用该属性指令的元素讲具有对应的属性功能，下面的C则是指元素指令，与属性指令有所区别
+　　A：自带指令：v-if、v-show、v-else、v-module、v-text、v-html、v-bind、v-on、v-el、v-cloak...
+　　这里着重说下v-text和v-cloak：在模板中我们调用实例属性数据时通常这样{{ 实例属性 }}，这样在网速比较慢的情况下，页面出现闪烁的时候会把花括号和里面的原始内容显示出来，这样用户体验不好，处理这种情况有2种方式：
+　　　　1, 在较大段落元素上使用v-clock指令，并设置该元素的css: display:none
+　　　　2, 使用v-text/v-html代替花括号即可，Vue2.0也支持这样做，且花括号方式可能被取消
+　　B：自定义指令语法：
+　　Vue.directive("指令名称",function(..){
+　　　　this.el.style.background = 'red';   //这里的this代表new出来的实例，this.el代表原生的dom元素
+　　});
+　　模板中使用v-指令名称进行使用，或v-指令名称="参数"，可以在调用指令是进行传参
+　　定义指令名称时不加v-，模板使用时加v-
+　　C: 自定义元素指令 （它所想要达到的效果，组件已超越）
+    Vue.elementDirective("自定义元素名称",{
+　　　　bind: function() {};
+　　});
+　　它不支持B情况语法，但B情况语法却默认也是bind
+6，自定义键盘信息
+	Vue.directive('on'),keyCodes.ctrl = 17;  //17是ctrl的键码  等号前的ctrl是定义ctrl的别名，可以随便取，实际绑定的就是键盘上的ctrl键

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- <div id="app">
+        <div v-if="Math.random()>0.5">Sorry</div>
+        <div v-else>Not Sorry</div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app"
+        })
+    </script> -->
+
+    <!-- <div id="app">
+        <div v-if="type === 'a'">a</div>
+        <div v-else-if="type==='b'">b</div>
+        <div v-else-if="type==='c'">c</div>
+        <div v-else-if="type==='d'">d</div>
+        <div v-else="type===e">Not a/b/c/d</div>
+    </div>
+    <script>    
+       new Vue({
+            el:"#app",
+            data:{
+                type:"c"
+            }
+       }) 
+    </script> -->
+
+    <!-- v-show -->
+    <div id="app">
+        <h1 v-show="ok">Hello</h1>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                ok:true
+            }
+        })
+    </script>
+</body>
+</html>

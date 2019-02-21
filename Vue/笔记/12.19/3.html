@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+v-show 参数是布尔值 默认值是false 操作的属性的display
+-->
+<div id="app">
+    <button v-on:click="change"></button>
+    <div  v-show="seen" style="width: 100px;height: 100px;background: red"></div>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+          seen:true
+        },
+        methods:{  //方法池
+            change(){
+                this.seen=!this.seen
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 基础例子 -->
+    <!-- <div id = "app"></div>
+    <script>    
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+            methods:{}
+        })
+        var mymixin = {
+            created:function(){
+                this.startmixin()
+            },
+            methods:{
+                startmixin:function(){
+                    document.write("混入实例")
+                }
+            }
+        }
+        var Component = Vue.extend({
+            mixins:[mymixin]
+        })
+        var component = new Component() 
+    </script> -->
+
+
+    <!-- 结合使用 -->
+    <!-- <div id = "databinding"></div>
+    <script type = "text/javascript">
+        var mixin = {
+            created: function () {
+                document.write('混入调用' + '<br>')
+            }
+        }
+        new Vue({
+            mixins: [mixin],
+            created: function () {
+                document.write('组件调用' + '<br>')
+            }
+        });
+    </script> -->
+
+    <!-- methods 选项中有相同的函数名，则 Vue 实例优先级会较高 -->
+    <div id = "databinding"></div>
+        <script type = "text/javascript">
+        var mixin = {
+            methods: {
+                hellworld: function () {
+                    document.write('HelloWorld 方法' + '<br>');
+                },
+                samemethod: function () {
+                    document.write('Mixin1：相同方法名' + '<br>');
+                }
+            }
+        };
+        var vm = new Vue({
+            mixins: [mixin],
+            methods: {
+                start: function () {
+                    document.write('start 方法' + '<br>');
+                },
+                samemethod: function () {
+                    document.write('Main2：相同方法名' + '<br>');
+                }
+            }
+        });
+        vm.hellworld();
+        vm.start();
+        vm.samemethod();
+    </script>
+</body>
+</html>

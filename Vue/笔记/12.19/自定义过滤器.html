@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+自定义过滤器 filter currency(货币过滤器)   json
+
+-->
+<div id="app">
+   <!--{{num | uppercase}}-->
+   <!--{{num | reverse}}-->
+   <!--{{num | sum}}-->
+    {{num | currency}}
+</div>
+<script>
+    //全局自定义过滤器
+    Vue.filter("uppercase",function(el){
+       return el.toUpperCase()
+    });
+    Vue.filter("reverse",function(el){
+        return el.split("").reverse().join("")
+    });
+//    //在1.0版本里有 叫双向过滤器     后来取消是因为向react学习 单向数据流
+//    Vue.filter("sum",{
+//        result(a){
+//            console.log(arguments);
+//        }
+//    });
+    Vue.filter("currency",function(el){
+        if(Number(el)){
+            return "$"+el
+        }
+    });
+    new Vue({
+        el:"#app",
+        data:{
+           num:1
+        },
+        // 局部自定义过滤器
+//        filters:{
+//            uppercase(el){
+//                return el.toUpperCase()
+//            }
+//        }
+    })
+</script>
+</body>
+</html>

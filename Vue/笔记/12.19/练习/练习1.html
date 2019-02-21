@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <custom :parent-info="message"></custom>
+</div>
+<script>
+    Vue.component("custom",{
+        props:["parentInfo"],
+       template:`
+           <div>{{parentInfo}}</div>
+       `
+    });
+    new Vue({
+        el:"#app",
+        data:{
+            message:"你好"
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <smart-list name="items"></smart-list>
+    <script>
+        var EmptyList = {};
+        var TableList = {};
+        var OrderedList = {};
+        var UnorderedList = {}
+        Vue.component('smart-list',{
+            functional:true,
+            props:{
+                items:{
+                    type:Array,
+                    required:true
+                },
+                isOrdered:Booelean
+            },
+            render:function(cleateElement,context){
+                function appropriateListComponent(){
+                    var items = context.props.items;
+                    if(items.length === 0) return EmptyList
+                    if(typeof items[0] === 'object') return TableList
+                    if(context.props.isOrdered) return OrderedList
+                    return UnorderedList 
+                }
+                return cleateElement(
+                    appropriateListComponent(),
+                    context.data,
+                    context.children
+                )
+            }
+        })
+    </script>
+</body>
+</html>

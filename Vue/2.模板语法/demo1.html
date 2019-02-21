@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+    <style>
+        .class1{
+            background: #444;
+            color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <!-- 文本插值 -->
+    <!-- <div id="app">
+        <p>{{message}}</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                message:"sunjiwei"
+            }
+        })
+    </script> -->
+
+    <!-- 使用 v-html指令用于输出html代码 -->
+    <!-- <div id="app">
+        <div v-html = "message"></div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                message:"<h1>孙继伟</h1>"
+            }
+        })
+    </script> -->
+
+    <!-- 判断 class1 的值，如果为 true 使用 class1 类的样式，否则不使用该类 -->
+    <div id="app">
+        <label for="r1">修改颜色</label>
+        <input type="checkbox" v-model="class1" id="r1">
+        <br>
+        <div :class="{'class1':class1}">
+            v-bind:class指令                
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                class1:false
+            }
+        })
+    </script>
+</body>
+</html>

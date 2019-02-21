@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../../vue.min.js"></script>
+</head>
+<body>
+<!--延时3秒触发事件-->
+<div id="app">
+    <input type="text" v-debounce="search">
+    {{num}}
+</div>
+<!--
+执行
+3秒 时间  setInterval
+
+函数节流 可以减少http的请求次数
+-->
+<script>
+    //全局自定义属性
+    Vue.directive("debounce", {
+        inserted(el, binding){
+            var timer;
+            el.addEventListener("keyup", function () {
+                if (timer) {
+                    clearInterval(timer);
+                }
+                timer = setTimeout(function () {
+                    // value在这里表示的是一个函数
+                    binding.value()
+                }, 3000)
+            });
+
+        }
+    });
+    new Vue({
+        el: "#app",
+        data: {
+            num: 1
+        },
+        methods: {
+            search(){
+                console.log(1);  //测试能不能触发
+                this.num++;
+            }
+        }
+    })
+</script>
+</body>
+</html>

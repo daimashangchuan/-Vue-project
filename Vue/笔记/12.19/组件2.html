@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--通过v-bind绑定-->
+    <custom :parent-info="parent"></custom>
+</div>
+<script>
+    //全局组件
+    Vue.component("custom", {
+        //props: 相当于传递的过程  需要写成驼峰式命名法
+        props:["parentInfo"],
+        //用模板字符串可以换行
+        template: `
+             <div>
+                <div>我是全局组件</div>
+                <div>{{parentInfo}}</div>
+             </div>
+        `
+    });
+    new Vue({
+        el: "#app",
+        data:{
+            parent:"5768"
+        },
+        methods:{
+
+        }
+    })
+</script>
+</body>
+</html>

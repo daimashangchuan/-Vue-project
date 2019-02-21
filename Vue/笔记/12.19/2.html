@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--  mvvm -->
+<div id="app">
+    <!--
+    v-for
+     :key="index"  在webstorm中如果不指定索引的话会报错 ，但不影响功能 不加也可以
+    -->
+    <div v-for="(item,index) in arr" :key="index">{{item}}--{{index}}</div>
+    <div v-for="(item,index) in json" >{{item.title}}--{{index}}</div>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            arr:[111,222,333],
+            json:[
+                {"title":"new"},
+                {"title":"about"},
+                {"title":"haha"}
+            ]
+        }
+    })
+</script>
+</body>
+</html>

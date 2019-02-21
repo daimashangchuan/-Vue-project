@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+ v-on  @
+ 普通事件
+-->
+<div id="app">
+    <button @click="click">点击</button>
+    <button @mouseover="mouseover">鼠标经过</button>
+    <button @mouseout="mouseout">鼠标离开</button>
+    <button @mouseenter="mouseenter">鼠标移入</button>
+    <button @mouseleave="mouseleave">鼠标移出</button>
+    <button @mousemove="mousemove">move</button>
+    <button @mousedown="mousedown">按下</button>
+    <button @mouseup="mouseup">抬起</button>
+    <button @dblclick="db">双击</button>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        methods:{
+            click(){
+                console.log("点击");
+            },
+            mouseover(){
+                console.log("mouseover");
+            },
+            mouseout(){
+                console.log("mouseout");
+            },
+            mouseenter(){
+                console.log("mouseenter");
+            },
+            mouseleave(){
+                console.log("mouseleave");
+            },
+            mousemove(){
+                console.log("mousemove");
+            },
+            mousedown(){
+                console.log("mousedown");
+            },
+            mouseup(){
+                console.log("mouseup");
+            },
+            db(){
+                console.log("双击");
+            }
+        }
+    })
+</script>
+</body>
+</html>

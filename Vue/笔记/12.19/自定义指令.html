@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+自定义指令
+-->
+<div id="app">
+    <div v-red style="width: 100px;height: 100px;border: 3px solid #999"></div>
+    <div v-pic style="width: 100px;height: 100px;border: 3px solid #999"></div>
+</div>
+<script>
+    //实现百度图片加载   实现延时3秒 触发时间执行
+    //回调函数和钩子函数的区别
+    Vue.directive("red",function(el){
+        console.log(arguments);
+        el.style.background="red"
+    });
+    Vue.directive("pic",{
+        //bind 只调用一次，只在指令绑定元素上第一次执行
+       bind(){
+           console.log(arguments);
+       },
+        //inserted 被绑元素插入父节点时，被调用
+        inserted(){
+
+        },
+        //update  模板更新时被调用
+        update(){
+
+        },
+        //unbind 解绑 只调用一次
+        unbind(){
+
+        },
+        //componentUpdated  在模板更新后，再次调用被执行
+        componentUpdated(){
+
+        }
+    });
+    //rawName 显示指令
+    new Vue({
+        el:"#app"
+    })
+</script>
+</body>
+</html>

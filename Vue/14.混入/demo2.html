@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <script>    
+    // 为自定义的选项 'myOption' 注入一个处理器。
+    Vue.mixin({
+        created:function(){
+            var myoption = this.$options.myOption
+            if(myoption){
+                document.write(myoption)
+            }
+        }
+    })
+    new Vue({
+        myOption:"hello"
+    })
+    </script>
+</body>
+</html>

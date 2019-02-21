@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="wrap">
+        <custom :ishide="hide" :data="arr" btn="搜索"></custom>
+        <custom :ishide="hide" :data="arr" btn="查询"></custom>
+        <custom :ishide="hide" :data="arr" btn="2123"></custom>
+    </div>
+</div>
+
+<script>
+    Vue.component("custom",{
+        props:["ishide","data","btn"],
+       template:`
+          <div>
+              <input type="text" @click="show" v-model="childinfo">
+              <input type="button" :value="btn">
+              <custom-list v-show="ishide" :childlist="data" @receve="getchild"></custom-list>
+          </div>
+       `,
+        data(){
+          return{
+              childinfo:""
+          }
+        },
+        methods:{
+            show(){
+                this.ishide=!this.ishide
+            },
+            getchild(val){
+                this.childinfo=val
+            }
+        },
+        mounted(){
+            console.log(this.ishide);
+        }
+    });
+    Vue.component("custom-list",{
+        props:["childlist"],
+        template:`
+          <div>
+             <div>
+                 <ul>
+                    <li v-for="item in childlist" @click="childsend(item)">{{item}}</li>
+                 </ul>
+              </div>
+          </div>
+       `,
+        methods:{
+            childsend(item){
+//                console.log(item);
+                this.$emit("receve",item)
+            }
+        }
+    });
+    new Vue({
+        el:"#app",
+        data:{
+            hide:false,
+            arr:["123","234","345"]
+        }
+    })
+</script>
+</body>
+</html>

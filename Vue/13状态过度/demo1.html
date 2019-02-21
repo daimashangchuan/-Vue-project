@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+    <!-- jquery插件 TweenMax.min.js Flash业界久负盛名的动画引擎 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
+</head>
+<body>
+    <div id="animated-number-demo">
+        <input v-model.number="number" type="number" step="50">
+        <p>{{animatedNumber}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#animated-number-demo",
+            data:{
+                number:0,
+                tweenedNumber:0
+            },
+            computed:{
+                animatedNumber:function(){
+                    return this.tweenedNumber.toFixed(0)
+                }
+            },
+            watch:{
+                number:function(newValue){
+                    TweenLite.to(this.$data,0.5,{tweenedNumber:newValue})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

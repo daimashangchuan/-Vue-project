@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <aa></aa>
+</div>
+<script>
+    Vue.component("aa",{
+       template:`
+        <button @click="add">
+          点击{{num}}次
+        </button>
+       `,
+        data(){
+            return{
+                num:0
+            }
+        },
+        methods:{
+            add(){
+                this.num++
+            }
+        }
+    });
+    new Vue({
+        el:"#app",
+        data:{},
+        methods:{}
+    })
+</script>
+</body>
+</html>

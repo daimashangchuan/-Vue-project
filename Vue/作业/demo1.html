@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+   <div id="div1">
+        <input @keyup.enter="add" v-model="content" type="text">
+        <button @click="add">添加</button>
+        <div v-for="(val,index) in obj">
+            <span>{{val.cont}}</span>
+            <button @click="edit">编辑</button>
+            <button @click="obj.splice(index, 1)">删除</button>
+        </div>
+   </div>
+   <script>
+       var vm =  new Vue({
+            el:"#div1",
+            data:{
+                content:"",
+                obj:[
+                    {id:0,cont:111},
+                    {id:1,cont:222},
+                    {id:2,cont:333},
+                ],
+                id:3
+            },
+            methods:{
+                add:function(){
+                    if (this.content=="") {
+                         alert("请添加内容")   
+                    } else {
+                        this.obj.push({ 
+                            id:this.id++,
+                            cont:this.content
+                        })  
+                        this.content = ""; 
+                    }                                        
+                },
+                edit:function(){
+                    
+                }
+            }
+       })    
+   </script>
+</body>
+</html>

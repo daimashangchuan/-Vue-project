@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app"><!--根元素-->
+    {{message}}
+    <input type="text" v-model="message">
+</div>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            message: "vue"
+        },
+        beforeCreate(){
+            console.group("--实例创建之前--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        },
+        created(){
+            console.group("--实例已经创建--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        },
+        beforeMount(){
+            console.group("--实例挂载之前--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        },
+        mounted(){
+            console.group("--实例挂载完成--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        },
+        beforeUpdate(){
+            console.group("--实例更新之前--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        },
+        updated(){
+            console.group("--实例已经更新--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        },
+        beforeDestroy(){
+            console.group("--实例销毁之前--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        },
+        destroyed(){
+            console.group("--实例已经销毁--");
+            console.log("%c%s","color:red",this.$el);
+            console.log("%c%s","color:red",this.$data);
+            console.log("%c%s","color:red",this.message);
+        }
+    });
+    vm.$destroy();  //销毁生命周期
+</script>
+</body>
+</html>

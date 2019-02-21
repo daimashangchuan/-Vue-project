@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- <div id="app">
+        <ul>
+            <template  v-for="item in items">
+                <li>
+                    {{item.name}}
+                </li>
+                <li>-----------------</li>
+            </template>
+        </ul>
+    </div>  
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                items:[
+                    {name:"Runoob"},
+                    {name:"Google"},
+                    {name:"Taobao"}
+                ]
+            }
+        })
+    </script> -->
+
+    <!-- v-for 迭代对象 -->
+    <!-- 俩个参数为 键和值-->
+    <!-- 三个参数为 键丶值丶索引-->
+    <!-- <div id="app">
+        <ul>
+            <li v-for="(value,key,index) in object">
+                    {{index}}.{{key}}.{{value}}
+            </li>
+        </ul>
+    </div>
+    <script>    
+        new Vue({
+            el:"#app",
+            data:{
+                object:{
+                    name:"孙继伟",
+                    age:25,
+                    ID:1111
+                }
+            }
+        })
+    </script> -->
+
+
+    <!-- v-for 迭代数组 -->
+    <!-- 俩个参数为 对象与索引-->
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in items">
+                <!-- {{index}}.{{item}} -->
+                {{index}}.{{item}}
+            </li>
+        </ul>
+    </div>
+    <script>    
+        new Vue({
+            el:"#app",
+            data:{
+                // items:[
+                //     {name:"sunjiwei"},
+                //     {age:"25"},
+                //     {id:1111}
+                // ]
+                items:[
+                    {message:"sunjiwei"},
+                    {message:"25"},
+                    {message:1111}
+                ]
+            },    
+        })
+    </script>
+
+    
+</body>
+</html>

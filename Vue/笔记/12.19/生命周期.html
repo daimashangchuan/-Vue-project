@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+</div>
+<script>
+    var app=new Vue({
+        el:"#app",
+        data:{
+           message:"23434"
+        },
+       beforeCreate(){
+           console.log("实例创建之前");
+       },
+        created(){
+            console.log("实例已经创建");
+        },
+        beforeMount(){
+            console.log("实例挂载之前");
+        },
+        mounted(){
+            console.log("实例挂载完成");
+        },
+        beforeUpdate(){
+            console.log("实例更新之前");
+        },
+        updated(){
+            console.log("实例已经更新");
+        },
+        beforeDestroy(){
+            console.log("实例销毁之前");
+        },
+        destroyed(){
+            console.log("实例已经销毁");
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="box">
+        <input type="button" @click="post()" value="点我异步获取数据(Post)">
+    </div>
+    <script>    
+        window.onload = function(){
+            var vm = new Vue({
+                el:'#box',
+                data:{
+                    msg:'Hello World!',
+                },
+                methods:{
+                    post:function(){
+                        //发送 post 请求
+                        this.$http.post('/try/ajax/demo_test_post.php',{name:"菜鸟教程",url:"http://www.runoob.com"},{emulateJSON:true}).then(function(res){
+                            document.write(res.body);    
+                        },function(res){
+                            console.log(res.status);
+                        });
+                    }
+                }
+            });
+        }
+        // <?php
+        //     $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
+        //     $city = isset($_POST['url']) ? htmlspecialchars($_POST['url']) : '';
+        //     echo '网站名: ' . $name;
+        //     echo "\n";
+        //     echo 'URL 地址: ' .$city;
+        // ?>
+    </script>
+   
+</body>
+</html>

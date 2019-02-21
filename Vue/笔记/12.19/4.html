@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+v-if 传的是布尔值  默认值是true  操作的是dom(与v-show的区别)
+ v-else条件语句判断 可以用来选项卡 数据加载分页
+-->
+<div id="app">
+    <div  v-if="seen" style="width: 100px;height: 100px;background: red"></div>
+    <div  v-else style="width: 100px;height: 100px;background: blue"></div>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            seen:false
+        }
+    })
+</script>
+</body>
+</html>

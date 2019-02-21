@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div>
+    <p id="app">
+        {{message}}
+    </p>
+</div>
+<script>
+  var app= new Vue({
+        el:"#app",
+        data:{
+            message:"hello vue.js!"   //在控制台 直接修改app.message的值，页面会随着改变，因为是响应式的
+        }
+    })
+</script>
+</body>
+</html>

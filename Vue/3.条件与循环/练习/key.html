@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.min.js"></script>
+</head>
+<body>
+    <!-- v-for 默认行为试着不改变整体，而是替换元素。迫使其重新排序的元素 -->
+    <!-- <div id="app">
+        <ul>
+            <li v-for="n in object">{{n}}</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                object:{
+                    2:"22222",
+                    0:"sunjiwei",
+                    1:"25"    
+                }
+            }
+        })
+    </script> -->
+
+    <!-- key -->
+    <div id="app">
+        <div v-for="item in items" :key="item.id">{{item}}</div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                items:[
+                    {id:1,name:"sunjiwei"},
+                    {id:2,name:"zhangsan"},
+                    {id:3,name:"lisi"},
+                    {id:4,name:"wangwu"}
+                ]
+            }
+        }) 
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.min.js"></script>
+    <style>
+        table{
+            width: 600px;
+            border: 2px solid orangered;
+            text-align: center;
+        }
+        thead{
+            background: orangered;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <fieldset >
+            <legend>fom表单</legend>
+            <div>
+                <span>姓名</span>
+                <input type="text" placeholder="姓名" v-model="newstu.name">
+            </div>
+            <div>
+                <span>年龄</span>
+                <input type="text" placeholder="年龄" v-model="newstu.age">
+            </div>
+            <div>
+                <span>性别</span>
+                <input type="text" placeholder="性别" v-model="newstu.sex">
+            </div>
+            <button @click="changeContent()">创建用户</button>
+        </fieldset>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>性别</td>         
+                    <td>删除</td>   
+                    <td>修改</td>        
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(p,index) in persons">
+                    <td>{{p.name}}</td>
+                    <td>{{p.age}}</td>
+                    <td>{{p.sex}}</td>
+                    <td>
+                        <button v-on:click="deleteSu(index)">
+                            删除
+                        </button>
+                    </td>
+                    <td>
+                        <button @click="update(index)">
+                                修改
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="up" :style="{display:hide}">
+                <div>
+                        <span>姓名</span>
+                        <input type="text" placeholder="姓名" v-model="newstu1.name">
+                    </div>
+                    <div>
+                        <span>年龄</span>
+                        <input type="text" placeholder="年龄" v-model="newstu1.age">
+                    </div>
+                    <div>
+                        <span>性别</span>
+                        <input type="text" placeholder="性别" v-model="newstu1.sex">
+                    </div>
+                    <button @click="ups()">修改</button>
+        </div>
+    </div>
+</body>
+<script>
+     new Vue({
+        el: '#app',
+        data:{
+            persons:[
+                {"name":"张山","age":15,"sex":"男"},
+                {"name":"赵六","age":25,"sex":"男"},
+                {"name":"王五","age":35,"sex":"男"},
+                {"name":"钱八","age":45,"sex":"男"},
+            ],
+            newstu:{name:"",age:"0",sex:""},
+            newstu1:{name:"",age:"",sex:""},            
+            hide:"none",
+            cc:""
+        },
+        methods:{//实例的所有函数实现
+            changeContent(){
+                // 姓名不能为空
+                if(this.newstu.name===""){
+                    alert("姓名不能为空");
+                    return;
+                }
+                if(this.newstu.age<0){
+                    alert("请输入正确的年龄");
+                    return;
+                }
+                this.persons.unshift(this.newstu)
+                this. newstu={name:"",age:"",sex:""}
+            },
+            // 删除
+            deleteSu(index){
+                this.persons.splice(index,1)
+            },
+            // 修改弹框显示
+            update(index){
+                this.cc=index
+                this.hide="block";
+                
+            },
+            // 修改
+            ups(){
+                this.persons[this.cc].name=this.newstu1.name,
+                this.persons[this.cc].age=this.newstu1.age,
+                this.persons[this.cc].sex=this.newstu1.sex,
+                this.hide="none",
+                this. newstu1={name:"",age:"",sex:""}
+            }
+        }
+  })
+</script>
+</html>

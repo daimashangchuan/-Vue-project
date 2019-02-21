@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+  按键修饰符
+ 需要获取焦点才可以使用
+-->
+<div id="app">
+    <!--<button @keydown="down">down</button>-->
+    <!--<button @keydown.13="down">enter</button>-->
+    <!--<button @keydown.space="down">space</button>-->
+    <button @keydown.up="up">up</button>
+    <button @keydown.down="down">down</button>
+    <button @keydown.left="left">left</button>
+    <button @keydown.right="right">right</button>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        methods:{
+            down(){
+                console.log("down")
+            },
+            up(){
+                console.log("up");
+            },
+            left(){
+                console.log("left");
+            },
+            right(){
+                console.log("right");
+            }
+        }
+    })
+</script>
+</body>
+</html>

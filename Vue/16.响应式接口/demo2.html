@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 数据添加 get/set 方法不能在sun属性中使用-->
+    <!-- <div id="app">
+        <p style="font: size 25px;">计算器{{products.id}}</p>
+        <button @click="products.id++" style="font: size 25px;">点我</button>
+    </div>
+    <script>    
+        var myproduct = {"id":1,name:"book",price:"20.00"};
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                counter:1,
+                products:myproduct
+            }
+        });
+        vm.products.sun = "1";
+        console.log(vm)
+        vm.$watch('products.id',function(nval,oval){
+            alert('计算器值的变化:'+oval+'变为'+nval+'!')
+        });
+    </script> -->
+
+    <!-- get/set可以在sun属性上使用 -->
+    <div id="app">
+        <p style="font: size 25px;">计算器{{products.id}}</p>
+        <button @click="products.id++" style="font: size 25px;">点我</button>
+    </div>
+    <script>    
+        var myproduct = {"id":1,name:"book",price:"20.00"};
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                counter:1,
+                products:myproduct
+            }
+        });
+        Vue.set(myproduct,'sun',1)
+        console.log(vm)
+        vm.$watch('products.id',function(nval,oval){
+            alert('计算器值的变化:'+oval+'变为'+nval+'!')
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 全局注册指令 -->
+    <!-- input自动获取焦点 页面载入时 -->
+    <!-- <div id="app">
+        <input v-focus>
+    </div>
+    <script>
+        // 注册一个全局自定义指令 v-focus
+        Vue.directive("focus",{
+            inserted:function(el){
+                el.focus()
+            }
+        })
+        new Vue({
+            el:"#app"
+        })
+    </script> -->
+
+    <!-- 局部注册指令 -->
+    <div id="app">
+        <input v-focus>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            directives:{
+                // 注册一个局部的自定义指令 v-focus
+                focus:{
+                    //  指令定义
+                    inserted:function(el){
+                        // 聚焦元素
+                        el.focus()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

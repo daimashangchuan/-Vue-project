@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <div :style="win"></div>
+</div>
+<script>
+    var app3=new Vue({
+        "el":"#app",
+        "data":{
+           win:{
+               width:window.innerWidth+"px",
+               height:window.innerHeight+"px",
+               background:"red"
+           }
+        }
+    })
+</script>
+</body>
+</html>

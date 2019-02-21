@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+    <style>
+        .run{
+            transition: all .5s ease-out;
+        }
+    </style>
+</head>
+<body>
+<!--
+动画 ：transition
+vue的内置组件：
+指令 v-enter  ：定义进入过渡的开始状态，在元素插入时（被调用时）被调用；
+    v-enter-active  ：定义进入过渡状态，在元素插入时（被调用时）被调用；
+    v-enter-to   ：定义进入过渡的结束状态
+    v-leave
+    v-leave-active
+    v-leave-to
+
+    fade=v   fade-enter
+-->
+<div id="app">
+    <button @click="toggle">动画</button>
+    <transition
+            @before-enter="beforeenter"
+            @enter="enter"
+            @after-enter="afterenter"
+    >
+        <div v-show="hide" class="run" style="width: 100px;height: 100px;background: red"></div>
+    </transition>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            hide:false
+        },
+        methods:{
+            toggle(){
+                this.hide=!this.hide
+            },
+            beforeenter(el){
+//                console.log(argument);
+                el.style.transform="translate(100px,0)";  //定义元素的初始位置
+            },
+            enter(el,done){
+//                console.log(arguments);  两个参数  el:元素本身  done:完成后执行的回调函数
+                el.offsetWidth;    //设置刷新元素的状态  元素重置 让他从0开始
+                el.style.transform="translate(0,0)";
+                //动作完成  解决元素的卡顿
+                done()
+            },
+            afterenter(){      // afterenter相当于进入到0点 后做的动作;让动画回归到初始的状态
+                this.hide=!this.hide
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

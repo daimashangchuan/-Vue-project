@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--  mvvm -->
+<div id="app">
+    <p>
+        {{message}}   <!-- {{}}插值表达式  作用：可以解析js语句-->
+    </p>
+    <input type="text" v-model="message">
+</div>
+{{message}}   <!--写在外面不起作用 -->
+<script>
+    new Vue({
+        el:"#app",   //element 元素  声明当前的实例仅针对app这个容器
+        data:{  //data 数据存放源
+            message:"hello vue.js"
+        }
+    })
+</script>
+</body>
+</html>

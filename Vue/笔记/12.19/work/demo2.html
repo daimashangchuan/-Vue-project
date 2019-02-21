@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../../vue.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0
+        }
+        .top span{
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            /* float: left; */
+            background: darkseagreen;
+            border: 1px solid seagreen;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            margin-top: 20px;
+        }
+        .box div{
+            width: 300px;
+            height: 300px;
+            display: none;
+        }
+        .box .con1{
+            display: block;
+        }
+        .top .active{
+            background: yellow;
+        }
+    </style>
+</head> 
+<body>
+    <div id="app">
+            <div class="top" >
+                <!-- <span :style="bg1">1</span>
+                <span :style="bg2">2</span>
+                <span :style="bg3">3</span>                 -->
+                <span v-for="(tab,index) in tabsName" :class="{active:tab.isActive}"  @click="change(index)">{{tab.name}}</span>
+            </div>
+            <div class="box">
+                <div class="con1" :style="bg1"></div>
+                <div class="con2" :style="bg2"></div>
+                <div class="con3" :style="bg3"></div>                
+            </div>
+    </div>
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            bg1:{background:"red",},
+            bg2:{background:"pink"},
+            bg3:{background:"yellow"},
+            tabsName: [{
+					name: "1",
+					isActive: true
+				}, {
+					name: "2",
+					isActive: false
+				}, {
+					name: "3",
+					isActive: false
+				}],         
+        },
+        methods:{
+            change(index){
+                var tabCar = document.querySelectorAll(".box div"),
+						len = tabCar .length;
+                        
+					for(var i = 0; i < len; i++) {
+						tabCar[i].style.display = "none";
+						this.tabsName[i].isActive = false;
+					}
+					this.tabsName[index].isActive = true;
+					tabCar[index].style.display = "block";
+            }
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <div id="app"  v-runoob:hello.a.b="message"></div>
+            ​
+    <script>
+        Vue.directive('runoob', {
+            bind: function (el, binding, vnode) {
+                var s = JSON.stringify
+                el.innerHTML =
+                    'name: '       + s(binding.name) + '<br>' +
+                    'value: '      + s(binding.value) + '<br>' +
+                    'expression: ' + s(binding.expression) + '<br>' +
+                    'argument: '   + s(binding.arg) + '<br>' +
+                    'modifiers: '  + s(binding.modifiers) + '<br>' +
+                    'vnode keys: ' + Object.keys(vnode).join(', ')
+            }
+        })
+        new Vue({
+            el: '#app',
+            data: {
+                message: '菜鸟教程!'
+            }
+        })
+    </script>
+
+
+    <!-- 不需要钩子函数 -->
+    <div id="app1">
+        <div v-runoob="{ color: 'green', text: '菜鸟教程!' }"></div>
+    </div>
+    <script>
+        Vue.directive("runoob",function(el,binding){
+            el.innerHTML = binding.value.text
+	        el.style.backgroundColor = binding.value.color
+        })
+        new Vue({
+            el:"#app1"
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 单选按钮 -->
+    <!-- <div id="app">
+        <input type="radio" id="sunjiwei" value ="nihao" v-model="picked">
+        <label for="sunjiwei">nihao</label>
+        <br>
+        <input type="radio" id="sun" value ="haha" v-model="picked">
+        <label for="sun">haha</label>
+        <br>
+        <p>选中值为:{{picked}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                picked:""
+            }
+        })
+    </script> -->
+
+    <!-- 选择框 -->
+    <!-- <div id="app">
+        <select v-model="selected" name="fruit" >
+            <option value="">请选择</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
+        <div id="output">
+            选择的网站是: {{selected}}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                selected:""
+            }
+        })
+    </script> -->
+
+    <!-- 多选框(绑定在字符串) -->
+    <div id="app">
+        <select v-model="selected" multiple >
+            <option>请选择</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+        </select>
+        <div id="output">
+            选择的网站是: {{selected}}
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                selected:[]
+            }
+        })
+    </script>
+</body>
+
+</html>

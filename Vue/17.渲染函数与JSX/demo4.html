@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- v-if 和 v-for  用render写法 -->
+    <!-- <ul v-if='items.length'>
+        <li v-for='item in items'>{{item.name}}</li>
+    </ul>
+    <p v-else>No items found</p>
+    <script>
+        Vue.component('zujianming',{
+            props:['items'],
+            render:function(cleateElement){
+                if (this.items.length) {
+                    return cleateElement('ul',this.items.map(function(item){
+                        return cleateElement('li',item.name)
+                    }))
+                } else {
+                    return clearElement('p','No items found.')
+                }
+            }
+        })
+    </script> -->
+
+    <!-- v-model 用render的写法 没有直接对应的方法  自己实现相应的逻辑-->
+    <script>
+        Vue.component({
+            props:['value'],
+            render:function(){
+                var self = this
+                return cleateElement('input',{
+                    domProps:{
+                        value:self.value
+                    },
+                    on:{
+                        input:function(event){
+                            seif.$emit('input',event.target.value)
+                        }
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+</html>

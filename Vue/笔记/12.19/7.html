@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+v-clock  防止页面闪烁
+-->
+<div id="app">
+    <div  v-cloak> {{message}} </div>
+    <!-- 在1.0版本刷新的时候会闪烁一下 出现大括号 再出现-->
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            message:12323
+        }
+    })
+</script>
+</body>
+</html>

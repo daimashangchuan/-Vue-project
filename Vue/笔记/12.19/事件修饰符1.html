@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+<!--
+事件修饰符:
+.stop阻止事件冒泡   相当于 原生js里面的 ev.stopPropagation();  ev.cancelBubble=true;
+.prevent 阻止默认事件  相当于原生js里面的ev.preventDefault();
+-->
+<div id="app">
+    <div @click="parent" style="width: 200px;height: 200px;background: red">
+        <div @click.stop="child" style="width: 100px;height: 100px;background: blue"></div>
+    </div>
+    <button @contextmenu.prevent="right">右键</button>
+</div>
+<script>
+    new Vue({
+        el:"#app",
+        methods:{
+            parent(){
+               console.log("parent")
+            },
+            child(ev){
+                var ev=ev || event;
+                console.log("child");
+//                ev.stopPropagation();  // 原生js里阻止事件冒泡
+//                ev.cancelBubble=true;
+            },
+            right(ev){
+//                ev.preventDefault();
+                console.log(1);
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <style>
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+        .bounce-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.5);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    <div id = "databinding">
+        <button v-on:click = "show = !show">点我</button>
+        <transition name="bounce">
+            <p v-if="show">学的不仅是技术，更是梦想！！！</p>
+        </transition>
+    </div>
+    <script>    
+        new Vue({
+            el:"#databinding",
+            data:{
+                show:true
+            }
+        })
+    </script>
+</body>
+</html>

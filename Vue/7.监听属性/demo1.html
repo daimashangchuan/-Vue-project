@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- 直接操作DOM -->
+    <!-- <div id="app">
+        <button @click="counter+=1">增加1</button>
+        <p>点击{{counter}}次</p>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                counter:0
+            }
+        })
+    </script> -->
+
+    <!-- 操作方法 -->
+    <!-- <div id="app">
+        <button @click="greet">方法</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                name:"hello Vue.js"
+            },
+            methods:{
+                greet:function(event){
+                    // this 在方法指向当前 Vue 实例
+                    alert(this.name+"!")
+                    // event  原生的目标事件
+                    if (event) {
+                        alert(event.target.tagName)
+                    }
+                }
+            }
+        })
+    </script> -->
+
+    <!-- 内联内联处理器中的方法 -->
+    <div id="app">
+        <button @click="num('hi')">hi</button>
+        <button @click="sun('what',$event)">what</button>
+    </div>
+    <script>    
+        var vm = new Vue({
+            el:"#app",
+            methods:{
+                num:function(val){
+                    alert(val)
+                },
+                sun:function(val,event){
+                    alert(val)
+                    alert(arguments.length)
+                    if(event){
+                        alert(event.target.tagName)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

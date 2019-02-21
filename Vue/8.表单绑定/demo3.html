@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+</head>
+<body>
+    <!-- v-for 渲染的动态选项 -->
+    <div id="app">
+        <select v-model="selected">
+            <option v-for="option in options" v-bind:value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+        <span>Selected:{{selected }}</span>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                selected:"",
+                options:[
+                    {text:"one",value:"A"},
+                    {text:"two",value:"B"},
+                    {text:"three",value:"C"}
+                ]
+            }    
+        })
+    </script>
+</body>
+</html>

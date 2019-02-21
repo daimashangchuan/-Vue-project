@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../vue.min.js"></script>
+    <!--  -->
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+    <!-- 实现各种颜色的转换和颜色处理的微型 JavaScript 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/color-js@1.0.3"></script>
+    <style>
+        .example-7-color-preview {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        监听键盘回车
+        @keyup.enter='updateColor' 
+    -->
+    <div id="app">
+        <input v-model='colorQuery' @keyup.enter='updateColor' placeholder='请输入颜色'>
+        <button @click="updateColor">点击</button>
+        <p>视图</p>
+        <span :style="{background:tweenedCSSColor}" class="example-7-color-preview"></span>
+        <p>{{tweenedCSSColor}}</p>
+    </div>
+    <script>
+        //  在公共命名空间net.brehaut中获取Color
+        var Color = net.brehaut.Color
+        new Vue({
+            el: '#app',
+            data: {
+                colorQuery: '',
+                color: {
+                    red: 0,
+                    green: 0,
+                    blue: 0,
+                    alpha: 1
+                },
+                tweenedColor: {}
+            },
+            created: function () {
+                // Object.assign()  es6  用于对象合并的
+                // 第一个参数是目标对象，后面的参数都是源对象。
+                this.tweenedColor = Object.assign({}, this.color)
+            },
+            watch: {
+                color: function () {
+                    function animate() {
+                        // TWEEN.update() 告诉它什么时候开始运行 产生平滑动画效果
+                        if (TWEEN.update()) {
+                            // requestAnimationFrame方法来获得良好的图像性能
+                            requestAnimationFrame(animate)
+                        }
+                    }
+                    //  
+                    new TWEEN.Tween(this.tweenedColor)
+                        .to(this.color, 750)
+                        .start()
+                        animate()
+                }
+            },
+            computed: {
+                tweenedCSSColor: function () {
+                    return new Color({
+                        red: this.tweenedColor.red,
+                        green: this.tweenedColor.green,
+                        blue: this.tweenedColor.blue,
+                        alpha: this.tweenedColor.alpha
+                    }).toCSS()
+                }
+            },
+            methods: {
+                updateColor: function () {
+                    this.color = new Color(this.colorQuery).toRGB()
+                    this.colorQuery = ''
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

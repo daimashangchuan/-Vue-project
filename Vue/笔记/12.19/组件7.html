@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.min.js"></script>
+    <style>
+        .header {
+
+        }
+    </style>
+</head>
+<body>
+<!--
+slot  ：插槽 占位符  单独的slot 称为匿名插槽
+       加上name后 称为具名插槽
+       作用域插槽： slot-scope
+$mount 挂载
+
+props
+event : $emit $on
+bus
+slot-scope
+provide
+inject
+ref  $refs调用
+vuex
+-->
+<div id="app">
+    <custom ref="customq">
+        <div slot="header">
+            我是头部
+            <p>23445</p>
+        </div>
+        <div>ahahah</div>
+        <div slot="footer">我是底部</div>
+    </custom>
+</div>
+<script>
+    Vue.component("custom", {
+        template: `
+          <div>
+             <slot name="header"></slot>
+             <slot></slot>
+             <slot name="footer"></slot>
+             <custom-list >
+                 <template slot-scope="props">
+                     <h1>我是子组件{{props.data}}</h1>
+                     <div v-for="item in props.listdata">{{item}}</div>
+                 </template>
+             </custom-list>
+          </div>
+       `,
+        data(){
+            return{
+                custommsg:"hello"
+            }
+        }
+    });
+    Vue.component("custom-list", {
+        template: `
+          <div>
+             <slot :data="msg" :listdata="arr"></slot>
+          </div>
+       `,
+        data(){
+            return{
+                msg:"234",
+                arr:["123","344","456"]
+            }
+        }
+    });
+    new Vue({
+        data: {
+            msg: "111"
+        },
+        mounted(){
+            console.log(this.$refs.customq.custommsg);  //可以获取到hello
+        }
+    }).$mount("#app")
+</script>
+</body>
+</html>
