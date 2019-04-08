@@ -1,0 +1,30 @@
+.topic{
+	width: 260px;
+	height: 260px;
+	position: absolute;
+	left: 10px;
+    top: 70px;
+}
+.topic-ul li{
+	font-size: 30px;
+	color: #fff;
+	margin: 15px 0;
+}
+.topic-ul li span{
+	display: inline-block;
+	width: 30px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 30px;
+	border: 1px solid #000;
+	margin-right: 30px;
+	font-size: 25px;
+}
+.radiusSpan{
+	background: yellow;
+	color: red;
+}
+
+
+
+

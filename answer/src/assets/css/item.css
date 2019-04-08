@@ -1,0 +1,39 @@
+.item{
+	background: url(../image/1-1.jpg) no-repeat 0 0;
+	background-size: cover;
+	width: 100%;
+	height: 6.67rem;	
+}
+.title-tip{
+	position: relative;
+	float: right;
+}
+.title-tip p{
+	position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 70px;
+    margin: auto;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+}
+.push-button{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.imgsize{
+	width: 110px;
+	height: 52px;
+}
+
+
+
+
+
+
+
+
+
