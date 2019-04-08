@@ -1,0 +1,96 @@
+@mixin icon($url) {
+    display: inline-block;
+    width: 24px;
+    min-height: 24px;
+    margin-right: 10px;
+    background-image: url($url);
+    background-repeat: no-repeat;
+}
+
+.home-icon {
+    @include icon('./images/home.png')
+}
+
+.home-icon-active {
+    @include icon('./images/home-active.png')
+}
+
+.disease-icon {
+    @include icon('./images/disease.png')
+}
+
+.disease-icon-active {
+    @include icon('./images/disease-active.png')
+}
+
+.signing-icon {
+    @include icon('./images/signing.png')
+}
+
+.signing-icon-active {
+    @include icon('./images/signing-active.png')
+}
+
+.advisory-icon {
+    @include icon('./images/advisory.png')
+}
+
+.advisory-icon-active {
+    @include icon('./images/advisory-active.png')
+}
+
+.warning-icon {
+    @include icon('./images/warning.png')
+}
+
+.warning-icon-active {
+    @include icon('./images/warning-active.png')
+}
+
+.prediagnosis-icon {
+    @include icon('./images/prediagnosis.png')
+}
+
+.prediagnosis-icon-active {
+    @include icon('./images/prediagnosis-active.png')
+}
+
+.service-icon {
+    @include icon('./images/service.png')
+}
+
+.service-icon-active {
+    @include icon('./images/service-active.png')
+}
+
+.file-icon {
+    @include icon('./images/file.png')
+}
+
+.file-icon-active {
+    @include icon('./images/file-active.png')
+}
+
+.evaluation-icon {
+    @include icon('./images/evaluation.png')
+}
+
+.evaluation-icon-active {
+    @include icon('./images/evaluation-active.png')
+}
+
+.measuring-icon {
+    @include icon('./images/measuring.png')
+}
+
+.measuring-icon-active {
+    @include icon('./images/measuring-active.png')
+}
+
+.mechanism-icon {
+    @include icon('./images/mechanism.png')
+}
+
+.mechanism-icon-active {
+    @include icon('./images/mechanism-active.png')
+}

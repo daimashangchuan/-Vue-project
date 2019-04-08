@@ -1,0 +1,79 @@
+@mixin title-style {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #fff;
+}
+.signing {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  &-map {
+    flex: 5;
+    margin-right: 10px;
+
+    .title {
+      @include title-style;
+      color: #789eea;
+      span {
+        margin-right: 20px;
+      }
+    }
+    .list {
+      order: 1;
+      flex: calc(1 / 3);
+      background: #020e36;
+      border-radius: 10px;
+      font-size: .6rem;
+      padding: 0.8rem;
+      box-sizing: border-box;
+      ul {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: wrap;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+        li {
+          width: 40%;
+          height: 1rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          p {
+            display: flex;
+            i {
+              display: block;
+              width: 0.8rem;
+              height: 0.8rem;
+              border-radius: 4px;
+              margin-right: 1rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  &-chart {
+    flex: 3;
+    display: flex;
+    flex-flow: column;
+    margin-left: 10px;
+    &-sex {
+      flex: 11;
+      margin-bottom: 10px;
+      .title {
+        @include title-style;
+      }
+    }
+    &-age {
+      flex: 14;
+      margin-top: 10px;
+      .title {
+        @include title-style;
+      }
+    }
+  }
+}
